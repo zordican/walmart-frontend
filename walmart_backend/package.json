@@ -1,0 +1,29 @@
+{
+  "name": "walmart_backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon -r dotenv/config  --experimental-json-modules src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zordican/walmart-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zordican/walmart-frontend/issues"
+  },
+  "homepage": "https://github.com/zordican/walmart-frontend#readme",
+  "keywords": [],
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "^5.17.0",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.2",
+    "prisma": "^5.17.0"
+  }
+}
