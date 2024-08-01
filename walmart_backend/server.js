@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import cartRoutes from './routes/cartRoutes.js';
-import authRoutes from './routes/authRoutes.js';
+import cartRoutes from './src/routes/cartRoutes.js';
+import authRoutes from './src/routes/authRoutes.js';
 import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
 

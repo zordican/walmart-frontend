@@ -1,6 +1,6 @@
 import express from 'express';
-import { createCart, joinCart, addProductToCart, getCart, voteProduct } from '../controllers/cartController.js';
-import { authenticateToken } from './middleware/authenticateToken.js';
+import { createCart, joinCart, addProductToCart, getCart, voteProduct } from '../controllers/shareCartController.js';
+import { authenticateToken } from '../middleware/authenticateToken.js';
 
 const router = express.Router();
 
