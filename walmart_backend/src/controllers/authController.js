@@ -8,9 +8,9 @@ export const signup = async (req, res) => {
   try {
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
+      console.log("hurrah!!");
       return res.redirect('/login');
     }
-
     const salt = generateSalt();
     const hashedPassword = hashPassword(password, salt);
 
@@ -28,6 +28,7 @@ export const signup = async (req, res) => {
 
     return res.json({ message: 'User signed up successfully', user: newUser, token });
   } catch (error) {
+    console.log(error);
     return res.json({ error });
   }
 };
@@ -57,6 +58,7 @@ export const login = async (req, res) => {
 
     return res.json({ message: 'Login successful', user: existingUser, token });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
