@@ -6,12 +6,19 @@ import 'dotenv/config';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import { PrismaClient } from '@prisma/client';
+import cors from "cors";
+import helmet from "helmet";
+import morgan from "morgan";
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 const prisma = new PrismaClient();
 
+app
+  .use(cors())
+  .use(helmet())
+  .use(morgan("dev"))
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cookieParser());
