@@ -8,7 +8,6 @@ export const signup = async (req, res) => {
   try {
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
-      console.log("hurrah!!");
       return res.redirect('/login');
     }
     const salt = generateSalt();

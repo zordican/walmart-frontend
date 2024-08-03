@@ -2,9 +2,7 @@
 
 import { PrismaClient } from '@prisma/client';
 import { nanoid } from 'nanoid';
-
 const prisma = new PrismaClient();
-
 export const createCart = async (req, res) => {
   try {
     const { name } = req.body;
@@ -20,7 +18,6 @@ export const createCart = async (req, res) => {
     res.status(500).json({ error: 'Error creating cart' });
   }
 };
-
 export const getCart = async (req, res) => {
   try {
     const cart = await prisma.cart.findUnique({

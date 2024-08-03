@@ -23,6 +23,20 @@ export const createCart = async (req, res) => {
   }
 
   // If the cart doesn't exist, create a new one with a unique invitation link
+  // Check if a cart with the given name and user already exists
+  const existingCart = await prisma.cart.findFirst({
+    where: {
+      name,
+      users: {
+        some: {
+          userId,
+        },
+      },
+    },
+  });
+  if (existingCart) {
+    return res.status(200).json(existingCart);
+  }
   const cart = await prisma.cart.create({
     data: {
       name,
@@ -89,14 +103,42 @@ export const getCart = async (req, res) => {
 export const voteProduct = async (req, res) => {
   const { cartId, productId } = req.body;
   const userId = req.user.id;
+  console.log(req.user.name);
+  try {
+    // Check if the user has already voted for this product in the cart
+    const existingVote = await prisma.vote.findFirst({
+      where: {
+        userId,
+        productId,
+        cartId,
+      },
+    });
 
-  const vote = await prisma.vote.create({
-    data: {
-      cartId,
-      productId,
-      userId,
-    },
-  });
+    if (existingVote) {
+      return res.status(400).json({ error: "You have already voted for this product." });
+    }
 
-  res.status(201).json(vote);
+    // Create a new vote
+    const vote = await prisma.vote.create({
+      data: {
+        cartId,
+        productId,
+        userId,
+      },
+    });
+
+    // Increment the vote count for the product
+    const voter=await prisma.product.update({
+      where: { id: productId },
+      data: {
+        voteCount: {
+          increment: 1,
+        },
+      },
+    });
+
+    res.status(201).json(voter);
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred while voting." });
+  }
 };
