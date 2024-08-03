@@ -5,6 +5,24 @@ export const createCart = async (req, res) => {
   const { name } = req.body;
   const userId = req.user.id;
 
+  // Check if a cart with the given name and user already exists
+  const existingCart = await prisma.cart.findFirst({
+    where: {
+      name,
+      users: {
+        some: {
+          userId,
+        },
+      },
+    },
+  });
+
+  // If the cart exists, return it
+  if (existingCart) {
+    return res.status(200).json(existingCart);
+  }
+
+  // If the cart doesn't exist, create a new one with a unique invitation link
   const cart = await prisma.cart.create({
     data: {
       name,

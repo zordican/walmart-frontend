@@ -26,7 +26,7 @@ model Cart {
   id             String        @id @default(auto()) @map("_id") @db.ObjectId
   name           String
   products       CartProduct[] @relation("CartProducts")
-  invitationLink String
+  invitationLink String        @unique
   users          UserCart[]
   votes          Vote[]        @relation("CartVotes")
 }
