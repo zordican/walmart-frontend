@@ -22,21 +22,7 @@ export const createCart = async (req, res) => {
     return res.status(200).json(existingCart);
   }
 
-  // If the cart doesn't exist, create a new one with a unique invitation link
-  // Check if a cart with the given name and user already exists
-  const existingCart = await prisma.cart.findFirst({
-    where: {
-      name,
-      users: {
-        some: {
-          userId,
-        },
-      },
-    },
-  });
-  if (existingCart) {
-    return res.status(200).json(existingCart);
-  }
+  
   const cart = await prisma.cart.create({
     data: {
       name,
@@ -82,28 +68,39 @@ export const addProductToCart = async (req, res) => {
   res.status(201).json(cartProduct);
 };
 
+
 export const getCart = async (req, res) => {
   const { cartId } = req.params;
 
-  const cart = await prisma.cart.findUnique({
-    where: { id: cartId },
-    include: {
-      products: {
-        include: { product: true },
-      },
-      votes: {
-        include: { product: true },
-      },
-    },
-  });
+  if (!cartId) {
+    return res.status(400).json({ error: "Cart ID is required." });
+  }
 
-  res.status(200).json(cart);
+  try {
+    const cartProducts = await prisma.cartProduct.findMany({
+      where: { cartId },
+    });
+
+    if (cartProducts.length === 0) {
+      return res.status(404).json({ error: "No products found in this cart." });
+    }
+
+    const productIds = cartProducts.map(cp => cp.productId);
+
+    res.status(200).json(productIds);
+  } catch (error) {
+    console.error("Error fetching products from cart:", error);
+    res.status(500).json({ error: "An error occurred while fetching products from the cart." });
+  }
 };
+
+
 
 export const voteProduct = async (req, res) => {
   const { cartId, productId } = req.body;
   const userId = req.user.id;
   console.log(req.user.name);
+
   try {
     // Check if the user has already voted for this product in the cart
     const existingVote = await prisma.vote.findFirst({
@@ -128,7 +125,7 @@ export const voteProduct = async (req, res) => {
     });
 
     // Increment the vote count for the product
-    const voter=await prisma.product.update({
+    const updatedProduct = await prisma.product.update({
       where: { id: productId },
       data: {
         voteCount: {
@@ -137,8 +134,10 @@ export const voteProduct = async (req, res) => {
       },
     });
 
-    res.status(201).json(voter);
+    res.status(201).json(updatedProduct);
   } catch (error) {
+    console.error("Error voting for product:", error);  // Log the exact error
     res.status(500).json({ error: "An error occurred while voting." });
   }
 };
+
