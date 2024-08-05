@@ -1,0 +1,26 @@
+.profile_2{
+    font-size: 1.125rem;
+}
+
+.profile_2{
+    width: 10rem;
+    .items_Button{
+        .icon{
+            padding-right: 0.5rem ;
+        }
+        background: #0071ce;
+        border-radius: 5rem;
+        border: none;
+        text-decoration: solid;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .reorder{
+            font-size: 0.8rem;
+        }
+    }
+    .items_Button:hover{
+        background-color: #1a1717;
+    }
+}

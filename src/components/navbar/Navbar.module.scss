@@ -1,3 +1,85 @@
-.okay{
+.navbar{
+    width: 100%;
+    height: 5rem;
+    background-color:  #0071ce;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: fixed;
     top: 0;
+    left: 0;
+    z-index: 1000;
+    .logo{
+        width: 5%;
+        height: 2rem;
+        padding: none;
+        img{
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+    .search{
+        width: 50%;
+        height: 3rem;
+        display: flex;
+        .search_box{
+                width: 30rem;
+                height: 100%;
+                border-radius: 4rem;
+                border: none;
+                padding: 0 10px;
+                font-size: 1rem;
+                outline: none;
+                background-color: white;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            .search_input{
+                background-color: transparent;
+                border: none;
+                outline: none;
+                flex: 1;
+                font-size: 0.9rem;
+                color: black;
+                padding-left: 0.5rem;
+               
+
+            }
+            .search_input::placeholder{
+                color: #005194;
+            }
+            .search_btn{
+                width: 2rem;
+                height: 2rem;
+                border: 0;
+                border-radius: 60%;
+                background-color: #000000;
+                img{
+                 max-width: 100%;
+                max-height: 100%;
+                z-index: 1;
+                }
+            }
+        }
+       
+    }
+    .items{
+        .items_Button{
+            background: #0071ce;
+            border-radius: 5rem;
+            border: none;
+            text-decoration: solid;
+            text-align: left;
+            .reorder{
+                font-size: 0.8rem;
+            }
+        }
+        .items_Button:hover{
+            background-color: #1a1717;
+        }
+    }
+   
 }
+
