@@ -1,7 +1,8 @@
 import {useState, useEffect, useRef} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import './Cart.css'
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 const Cart = () => {
     
@@ -26,11 +27,11 @@ const Cart = () => {
 
   });
   return (
-    <div>
+    <div className = 'cart'>
       <div className="App">
       <div className='menu-container' ref={menuRef}>
         <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
-            <FontAwesomeIcon icon={faUser} />
+            <FontAwesomeIcon icon={faCartShopping} size='lg'/>
         </div>
 
         <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
@@ -49,7 +50,7 @@ const Cart = () => {
 function DropdownItem(){
     return(
       <li className = 'dropdownItem'>
-        <FontAwesomeIcon icon={faUser} />
+        <FontAwesomeIcon icon={faCartPlus} size='lg' style={{color: "#000000",}}/>
         <a> Shared Cart </a>
       </li>
     );
@@ -58,7 +59,7 @@ function DropdownItem(){
   function DropdownItem2(){
     return(
       <li className = 'dropdownItem'>
-        <FontAwesomeIcon icon={faUser} />
+        <FontAwesomeIcon icon={faCartShopping} size='lg' style={{color: "#000000",}}/>
         <a> Cart </a>
       </li>
     );
