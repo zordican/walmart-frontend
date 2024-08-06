@@ -66,3 +66,23 @@ export const logout = (req, res) => {
   res.clearCookie('jwt');
   return res.json({ message: 'Logout successful' });
 };
+
+
+export const checkAuth = async (req, res) => {
+  const token = req.cookies.jwt;
+  
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const user = await prisma.user.findUnique({
+        where: { id: decoded.userId },
+      });
+      if (user) {
+        return res.json({ user });
+      }
+    } catch (error) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+  }
+  return res.status(401).json({ message: 'Unauthorized' });
+};
