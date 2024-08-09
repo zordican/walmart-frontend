@@ -15,6 +15,7 @@ const Login = () => {
       const response = await axios.post('/api/auth/login', { username, email, password }, { withCredentials: true });
       if (response.data.message === 'Login successful') {
         console.log('Login successful');
+        localStorage.setItem('token', response.data.token);
       }
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred');

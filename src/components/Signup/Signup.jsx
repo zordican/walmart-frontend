@@ -15,6 +15,7 @@ const Signup = () => {
       const response = await axios.post('/api/auth/signup', { username, email, password }, { withCredentials: true });
       if (response.data.message === 'User signed up successfully') {
         console.log('Signup successful');
+        localStorage.setItem('token', response.data.token);
       }
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred');
