@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './Signup.module.scss';
+import { useNavigate } from 'react-router-dom';
+
 
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Use navigate for redirection
+
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -16,6 +20,7 @@ const Signup = () => {
       if (response.data.message === 'User signed up successfully') {
         console.log('Signup successful');
         localStorage.setItem('token', response.data.token);
+        navigate('/'); // Redirect to home page after successful login
       }
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred');

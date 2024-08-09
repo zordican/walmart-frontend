@@ -71,7 +71,7 @@ const Profile = () => {
                             Login
                         </a>
                         <hr className="navbar-divider" />
-                        <a href="/registro" className="navbar-item" id="item_register">
+                        <a href="/signup" className="navbar-item" id="item_register">
                             Registro
                         </a>
                     </div>
