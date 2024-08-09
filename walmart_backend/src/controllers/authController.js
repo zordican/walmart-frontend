@@ -25,7 +25,7 @@ export const signup = async (req, res) => {
     const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.cookie('jwt', token, { httpOnly: true, maxAge: 3600000 });
 
-    return res.json({ message: 'User signed up successfully', user: newUser, token });
+    return res.json({ message: 'User signed up successfully', user: newUser, token : token,});
   } catch (error) {
     console.log(error);
     return res.json({ error });
@@ -55,7 +55,7 @@ export const login = async (req, res) => {
     const token = jwt.sign({ userId: existingUser.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.cookie('jwt', token, { httpOnly: true, maxAge: 3600000 });
 
-    return res.json({ message: 'Login successful', user: existingUser, token });
+    return res.json({ message: 'Login successful', user: existingUser, token : token,});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: 'Internal Server Error' });
