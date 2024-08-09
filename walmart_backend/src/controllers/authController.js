@@ -8,8 +8,9 @@ export const signup = async (req, res) => {
   try {
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
-      return res.redirect('/login');
+      return res.status(400).json({ message: 'User already exists' });
     }
+
     const salt = generateSalt();
     const hashedPassword = hashPassword(password, salt);
 
@@ -25,10 +26,10 @@ export const signup = async (req, res) => {
     const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.cookie('jwt', token, { httpOnly: true, maxAge: 3600000 });
 
-    return res.json({ message: 'User signed up successfully', user: newUser, token : token,});
+    return res.json({ message: 'User signed up successfully', user: newUser, token });
   } catch (error) {
-    console.log(error);
-    return res.json({ error });
+    console.error('Signup error:', error);
+    return res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
@@ -55,10 +56,10 @@ export const login = async (req, res) => {
     const token = jwt.sign({ userId: existingUser.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.cookie('jwt', token, { httpOnly: true, maxAge: 3600000 });
 
-    return res.json({ message: 'Login successful', user: existingUser, token : token,});
+    return res.json({ message: 'Login successful', user: existingUser, token });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error('Login error:', error);
+    return res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
@@ -66,7 +67,6 @@ export const logout = (req, res) => {
   res.clearCookie('jwt');
   return res.json({ message: 'Logout successful' });
 };
-
 
 export const checkAuth = async (req, res) => {
   const token = req.cookies.jwt;
@@ -81,6 +81,7 @@ export const checkAuth = async (req, res) => {
         return res.json({ user });
       }
     } catch (error) {
+      console.error('Authentication error:', error);
       return res.status(401).json({ message: 'Unauthorized' });
     }
   }

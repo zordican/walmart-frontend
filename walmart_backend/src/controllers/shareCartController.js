@@ -1,11 +1,8 @@
 import { nanoid } from 'nanoid';
 import prisma from '../models/prismaClient.js';
-
 export const createCart = async (req, res) => {
   const { name } = req.body;
   const userId = req.user.id;
-
-  // Check if a cart with the given name and user already exists
   const existingCart = await prisma.cart.findFirst({
     where: {
       name,
@@ -16,8 +13,6 @@ export const createCart = async (req, res) => {
       },
     },
   });
-
-  // If the cart exists, return it
   if (existingCart) {
     return res.status(200).json(existingCart);
   }
