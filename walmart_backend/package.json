@@ -10,6 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/zordican/walmart-frontend.git"
   },
+ 
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -35,5 +36,8 @@
     "nanoid": "^5.0.7",
     "nodemon": "^3.1.4",
     "prisma": "^5.17.0"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   }
 }

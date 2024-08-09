@@ -96,6 +96,82 @@ export const getCart = async (req, res) => {
 
 
 
+export const allProducts =  async (req, res) => {
+  try {
+    const products = await prisma.product.findMany();
+    res.json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: 'Error fetching products' });
+  }
+};
+
+// Endpoint 2: Add a product to the user's cart
+export const addProduct =  async (req, res) => {
+  const { productId } = req.body;
+  const userId = req.user.id; // Assuming user is authenticated and user ID is available
+
+  try {
+    let userCart = await prisma.userCart.findFirst({
+      where: { userId },
+      include: { cart: true },
+    });
+
+    if (!userCart) {
+      const newCart = await prisma.cart.create({
+        data: { name: `${req.user.name}'s Cart`, users: { create: { userId } } },
+      });
+      userCart = { cartId: newCart.id };
+    }
+
+    await prisma.cartProduct.create({
+      data: {
+        cartId: userCart.cartId,
+        productId,
+      },
+    });
+
+    res.json({ message: 'Product added to cart' });
+  } catch (error) {
+    console.error('Error adding product to cart:', error);
+    res.status(500).json({ error: 'Error adding product to cart' });
+  }
+};
+
+
+// Endpoint 2: Add a product to the user's cart
+export const addtomain =  async (req, res) => {
+  const { productId } = req.body;
+  const userId = req.user.id; // Assuming user is authenticated and user ID is available
+
+  try {
+    let userCart = await prisma.userCart.findFirst({
+      where: { userId },
+      include: { cart: true },
+    });
+
+    if (!userCart) {
+      const newCart = await prisma.cart.create({
+        data: { name: `${req.user.name}'s Cart`, users: { create: { userId } } },
+      });
+      userCart = { cartId: newCart.id };
+    }
+
+    await prisma.cartProduct.create({
+      data: {
+        cartId: userCart.cartId,
+        productId,
+      },
+    });
+
+    res.json({ message: 'Product added to cart' });
+  } catch (error) {
+    console.error('Error adding product to cart:', error);
+    res.status(500).json({ error: 'Error adding product to cart' });
+  }
+};
+
+
 export const voteProduct = async (req, res) => {
   const { cartId, productId } = req.body;
   const userId = req.user.id;

@@ -29,16 +29,16 @@ export const getProductById = async (req, res) => {
   }
 };
 
-export const addProduct = async (req, res) => {
-  try {
-    const newProduct = await prisma.product.create({
-      data: req.body,
-    });
-    res.status(201).json(newProduct);
-  } catch (error) {
-    res.status(500).json({ error: 'Error creating product' });
-  }
-};
+// export const addProduct = async (req, res) => {
+//   try {
+//     const newProduct = await prisma.product.create({
+//       data: req.body,
+//     });
+//     res.status(201).json(newProduct);
+//   } catch (error) {
+//     res.status(500).json({ error: 'Error creating product' });
+//   }
+// };
 
 export const updateProduct = async (req, res) => {
   try {
@@ -61,4 +61,4 @@ export const deleteProduct = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Error deleting product' });
   }
-};
+}
