@@ -1,0 +1,150 @@
+.heading{
+    font-size:xx-large;
+}
+
+.cartItem{
+    padding: 1rem;
+    //@include flex(row, flex-start, center, 3rem);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3rem;
+    > img{
+        width: 10rem;   
+        height: 10rem;
+        object-fit: contain;
+    }
+
+    > article {
+        // @include flex(column,center, flex-start, 0.25rem);
+        display: flex;
+        text-align: justify;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.25rem;
+        a {
+            font-size: 1.2rem;
+            color: black;
+            &:hover {
+                color: blue;
+            }
+        }
+
+        span {
+            font-weight: 500;
+        }
+    }
+
+    > div {
+        margin-left: auto;
+        // @include flex;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        button {
+            border: none;
+            //@include square(2rem);
+            width: 2rem;
+            height: 2rem;
+            border-radius: 0.5rem;
+            // @include flex;
+            display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            &:hover {
+                background-color: rgb(233, 233, 233);
+                color: blue;
+            }
+        } 
+    }
+
+    > button {
+        border: none;
+        background-color: transparent;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 1.2rem;
+
+        &:hover {
+            color: red;
+        }
+    }
+}
+
+.calcSection {
+    width: 35%;
+    padding: 4rem;
+    // @include flex(column, center, stretch, 1.5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1.5rem;
+
+    > input {
+        padding : 1rem;
+        border: 0.1rem solid rgba(0,0,0,0.25);
+        // outline: none; (If you want that after clicking on input, outline shouldn't be dark, then, use this line.)
+        border-radius: 0.5rem;
+        margin-top: 2rem;
+    }
+
+    > p {
+        font-size: 1.1rem;
+    }
+    
+    > a {
+        background-color: blue;
+        padding: 1rem;
+        text-decoration: none;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+        border-radius: 0.2rem;
+
+        &:hover {
+            background-color: blue;
+            transition: 0.5s ;
+        }
+    }
+    > span {
+        margin-top: -1rem;
+        // @include flex(row, center, center, 0.5rem);
+        text-align: center;
+        font-size: 1rem;
+        > code {
+            font-weight: 700;
+            // align-self: flex-end;
+        }
+    }
+
+    > button {
+        border: none;
+        margin-top: 3rem;
+        background-color: transparent;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+}
+
+
