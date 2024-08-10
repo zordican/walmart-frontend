@@ -40,7 +40,8 @@ export const joinCart = async (req, res) => {
   const { invitationLink } = req.body;
   const userId = req.user.id;
 
-  const cart = await prisma.cart.findUnique({ where: { invitationLink } });
+  try{
+  const cart = await prisma.cart.findUnique({ where: { invitationLink },include: { users: true } });
   if (!cart) {
     return res.status(404).send('Cart not found');
   }
@@ -52,7 +53,11 @@ export const joinCart = async (req, res) => {
     },
   });
 
-  res.status(200).json(cart);
+  res.json({ message: 'Joined cart successfully', cartId: cart.id, ownerName: cart.users[0].user.name });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to join cart' });
+  }
 };
 
 export const addProductToCart = async (req, res) => {
@@ -69,74 +74,107 @@ export const addProductToCart = async (req, res) => {
 };
 
 
-export const getCart = async (req, res) => {
-  const { cartId } = req.params;
-
-  if (!cartId) {
-    return res.status(400).json({ error: "Cart ID is required." });
-  }
-
+export const joinedCarts = async (req, res) => {
   try {
-    const cartProducts = await prisma.cartProduct.findMany({
-      where: { cartId },
+    const userId = req.user.id; // Get the user ID from the authenticated user
+
+    const userCarts = await prisma.userCart.findMany({
+      where: { userId },
+      include: {
+        cart: {
+          include: {
+            users: {
+              include: {
+                user: true
+              }
+            }
+          }
+        }
+      }
     });
 
-    if (cartProducts.length === 0) {
-      return res.status(404).json({ error: "No products found in this cart." });
-    }
+    const carts = userCarts.map((userCart) => ({
+      cartId: userCart.cartId,
+      ownerName: userCart.cart.users[0].user.name,
+      invitationLink: userCart.cart.invitationLink
+    }));
 
-    const productIds = cartProducts.map(cp => cp.productId);
-
-    res.status(200).json(productIds);
-  } catch (error) {
-    console.error("Error fetching products from cart:", error);
-    res.status(500).json({ error: "An error occurred while fetching products from the cart." });
+    res.json(carts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch joined carts' });
   }
 };
 
+
+// Fetch products in the shared cart by cartId
+export const getSharedCartProducts = async (req, res) => {
+  const { cartId } = req.params;
+
+      if (!cartId) {
+        return res.status(400).json({ error: "Cart ID is required." });
+      }
+  
+  try {
+    const cartProducts = await prisma.cartProduct.findMany({
+      where: { cartId },
+      include: { product: true },
+    });
+    res.json(cartProducts.map(cp => cp.product));
+  } catch (error) {
+    console.error('Error fetching shared cart products:', error);
+    res.status(500).json({ error: 'Error fetching shared cart products' });
+  }
+};
 
 
 export const allProducts =  async (req, res) => {
   try {
     const products = await prisma.product.findMany();
     res.json(products);
+    
   } catch (error) {
     console.error('Error fetching products:', error);
+    console.log(error);
     res.status(500).json({ error: 'Error fetching products' });
   }
 };
 
-// Endpoint 2: Add a product to the user's cart
-export const addProduct =  async (req, res) => {
+// Endpoint: Add a product to a shared cart
+export const addProductToSharedCart = async (req, res) => {
   const { productId } = req.body;
-  const userId = req.user.id; // Assuming user is authenticated and user ID is available
+  const { cartId } = req.params; // Get cartId from the request parameters
 
   try {
-    let userCart = await prisma.userCart.findFirst({
-      where: { userId },
-      include: { cart: true },
+    // Check if the shared cart exists and the user is part of it
+    const sharedCart = await prisma.cart.findFirst({
+      where: { id: cartId },
+      include: {
+        users: {
+          where: { userId: req.user.id }, // Assuming user is authenticated and user ID is available
+        },
+      },
     });
 
-    if (!userCart) {
-      const newCart = await prisma.cart.create({
-        data: { name: `${req.user.name}'s Cart`, users: { create: { userId } } },
-      });
-      userCart = { cartId: newCart.id };
+    if (!sharedCart) {
+      return res.status(404).json({ error: 'Shared cart not found or you do not have access to it' });
     }
 
+    // Add the product to the shared cart
     await prisma.cartProduct.create({
       data: {
-        cartId: userCart.cartId,
+        cartId: sharedCart.id,
         productId,
       },
     });
 
-    res.json({ message: 'Product added to cart' });
+    res.json({ message: 'Product added to shared cart' });
   } catch (error) {
-    console.error('Error adding product to cart:', error);
-    res.status(500).json({ error: 'Error adding product to cart' });
+    console.error('Error adding product to shared cart:', error);
+    res.status(500).json({ error: 'Error adding product to shared cart' });
   }
 };
+
 
 
 // Endpoint 2: Add a product to the user's cart
@@ -217,3 +255,28 @@ export const voteProduct = async (req, res) => {
   }
 };
 
+
+// export const getCart = async (req, res) => {
+//   const { cartId } = req.params;
+
+//   if (!cartId) {
+//     return res.status(400).json({ error: "Cart ID is required." });
+//   }
+
+//   try {
+//     const cartProducts = await prisma.cartProduct.findMany({
+//       where: { cartId },
+//     });
+
+//     if (cartProducts.length === 0) {
+//       return res.status(404).json({ error: "No products found in this cart." });
+//     }
+
+//     const productIds = cartProducts.map(cp => cp.productId);
+
+//     res.status(200).json(productIds);
+//   } catch (error) {
+//     console.error("Error fetching products from cart:", error);
+//     res.status(500).json({ error: "An error occurred while fetching products from the cart." });
+//   }
+// };

@@ -22,7 +22,7 @@ export const signup = async (req, res) => {
       },
     });
 
-    const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET, { expiresIn: '24h' });
     res.cookie('jwt', token, { httpOnly: true, maxAge: 3600000 });
 
     return res.json({ message: 'User signed up successfully', user: newUser, token : token,});
@@ -52,7 +52,7 @@ export const login = async (req, res) => {
       return res.status(401).json({ message: 'Incorrect username or password' });
     }
 
-    const token = jwt.sign({ userId: existingUser.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: existingUser.id }, process.env.JWT_SECRET, { expiresIn: '24h' });
     res.cookie('jwt', token, { httpOnly: true, maxAge: 3600000 });
 
     return res.json({ message: 'Login successful', user: existingUser, token : token,});

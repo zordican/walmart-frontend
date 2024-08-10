@@ -10,7 +10,6 @@
     "type": "git",
     "url": "git+https://github.com/zordican/walmart-frontend.git"
   },
- 
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -29,7 +28,9 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "helmet": "^7.1.0",
+    "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.2",
     "morgan": "^1.10.0",
