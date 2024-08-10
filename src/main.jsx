@@ -13,6 +13,9 @@ import Logout from './components/logout/Logout.jsx';
 import SharedCart from './components/SharedCart/SharedCart.jsx';
 import JoinCart from './components/JoinCart/JoinCart.jsx';
 import HomePage from './components/HomePage/HomePage.jsx';
+//import UserSharedCartsPage from './components/pages/UserSharedCartsPage.jsx';
+ import SharedCartPage from './components/pages/SharedCartPage.jsx';
+
 
 const router = createBrowserRouter([
   { path: "/",element: <App />,},
@@ -25,6 +28,8 @@ const router = createBrowserRouter([
   { path: "/sharedcart", element: <SharedCart/>},
   { path: "/joincart", element: <JoinCart/>},
   { path: "/homepage", element: <HomePage/>},
+  { path: "/carted", element: <SharedCartPage/>},
+// { path: "/user/sharedcarts", element: <UserSharedCartsPage/>},
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

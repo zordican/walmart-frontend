@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const SharedCart = () => {
-  const cartId = localStorage.getItem('currentCartId');
+const SharedCartPage = ({ cartId }) => {
   const [products, setProducts] = useState([]);
   const [sharedCartProducts, setSharedCartProducts] = useState([]);
   const [error, setError] = useState(null);
@@ -27,7 +26,7 @@ const SharedCart = () => {
         console.error(err);
       }
     };
-
+ 
     fetchAllProducts();
     fetchSharedCartProducts();
   }, [cartId]);
@@ -68,4 +67,4 @@ const SharedCart = () => {
   );
 };
 
-export default SharedCart;
+export default SharedCartPage;

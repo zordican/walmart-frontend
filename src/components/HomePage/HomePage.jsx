@@ -10,7 +10,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('/api/products'); // Fetch products from backend
+        const response = await axios.get('/api/cart/products'); // Fetch products from backend
         setProducts(response.data);
       } catch (err) {
         setError('Error fetching products');
@@ -47,14 +47,18 @@ const HomePage = () => {
       <ul>
         {products.map(product => (
           <li key={product.id}>
-            <div>
-              <h2>{product.name}</h2>
-              <p>Price: ${product.price}</p>
-              <p>Rating: {product.rating}</p>
-              <p>Number of Ratings: {product.numRatings}</p>
-              <button onClick={() => addToCart(product.id)}>Add to Cart</button>
-              {/* Add your shared cart ID here or implement a UI to choose a shared cart */}
-              <button onClick={() => addToSharedCart(product.id, 'sharedCartId')}>Add to Shared Cart</button>
+            <div className="product-card">
+              <div className="product-details">
+                <h2>{product.name}</h2>
+                <p>Price: ${product.price}</p>
+                <p>Rating: {product.rating}</p>
+                <p>Number of Ratings: {product.numRatings}</p>
+              </div>
+              <div className="product-actions">
+                <button onClick={() => addToCart(product.id)}>Add to Cart</button>
+                {/* Add your shared cart ID here or implement a UI to choose a shared cart */}
+                <button onClick={() => addToSharedCart(product.id, 'sharedCartId')}>Add to Shared Cart</button>
+              </div>
             </div>
           </li>
         ))}
@@ -64,3 +68,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
