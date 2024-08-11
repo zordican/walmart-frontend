@@ -1,0 +1,24 @@
+/* Products.module.scss */
+.productContainer {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr)); /* Base grid setup */
+    gap: 16px; /* Adjust the gap between cards as needed */
+    // padding: 20px;
+    margin: 0%;
+    padding-top: 4rem;
+  }
+  
+  @media (min-width: 800px) {
+    .productContainer {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Allows up to 4 columns */
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .productContainer {
+      grid-template-columns: repeat(3, 1fr); /* Max 4 items per row */
+    }
+  }
+  
+  
+  
