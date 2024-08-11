@@ -41,7 +41,16 @@ export const joinCart = async (req, res) => {
   const userId = req.user.id;
 
   try{
-  const cart = await prisma.cart.findUnique({ where: { invitationLink },include: { users: true } });
+   const cart = await prisma.cart.findUnique({
+    where: { invitationLink },
+    include: {
+      users: {
+        include: {
+          user: true
+        }
+      }
+    }
+  });
   if (!cart) {
     return res.status(404).send('Cart not found');
   }
@@ -52,8 +61,12 @@ export const joinCart = async (req, res) => {
       cartId: cart.id,
     },
   });
-
-  res.json({ message: 'Joined cart successfully', cartId: cart.id, ownerName: cart.users[0].user.name });
+  const ownerName = cart.users[0]?.user?.name || 'Unknown';
+  res.json({
+    message: 'Joined cart successfully',
+    cartId: cart.id,
+    ownerName: ownerName
+  })
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to join cart' });
@@ -93,11 +106,17 @@ export const joinedCarts = async (req, res) => {
       }
     });
 
-    const carts = userCarts.map((userCart) => ({
-      cartId: userCart.cartId,
-      ownerName: userCart.cart.users[0].user.name,
-      invitationLink: userCart.cart.invitationLink
-    }));
+    const carts = userCarts.map((userCart) => {
+      const ownerName = userCart.cart.users.length > 0 && userCart.cart.users[0].user
+        ? userCart.cart.users[0].user.name
+        : 'Unknown';
+
+      return {
+        cartId: userCart.cartId,
+        ownerName,
+        invitationLink: userCart.cart.invitationLink,
+      };
+    });
 
     res.json(carts);
   } catch (err) {

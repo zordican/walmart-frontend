@@ -14,6 +14,7 @@ router.get('/products',authenticateToken,allProducts);
 router.post('/:cartId/add-product',authenticateToken,addProductToSharedCart);
 router.post('/add-product',authenticateToken,addtomain);
 router.get('/:userId/shared-carts', getUserSharedCarts);
-router.get('/joinedCarts',joinedCarts);
+router.get('/joinedcarts',authenticateToken,joinedCarts);
+router.post('/set')
 
 export default router;
