@@ -3,6 +3,7 @@ import { addtomain,addProductToSharedCart,allProducts,createCart, joinCart, addP
 import { authenticateToken } from '../middleware/authenticateToken.js';
 import { getUserSharedCarts } from '../controllers/userController.js';
 import { joinedCarts } from '../controllers/shareCartController.js';
+import { sharedCartProducts } from '../controllers/sharedCartProducts.js';
 const router = express.Router();
 
 router.post('/create', authenticateToken, createCart);
@@ -13,8 +14,8 @@ router.post('/vote', authenticateToken, voteProduct);
 router.get('/products',authenticateToken,allProducts);
 router.post('/:cartId/add-product',authenticateToken,addProductToSharedCart);
 router.post('/add-product',authenticateToken,addtomain);
-router.get('/:userId/shared-carts', getUserSharedCarts);
+// router.get('/:userId/shared-carts', getUserSharedCarts);
 router.get('/joinedcarts',authenticateToken,joinedCarts);
-router.post('/set')
+router.get('/:cartId/products',sharedCartProducts);
 
 export default router;
