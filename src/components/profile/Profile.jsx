@@ -65,16 +65,7 @@ const Profile = () => {
         <>
             {!navbarUserIsLogged ? (
                 <div className={styles.profile_1}>
-                    <img alt="user" />
-                    <div className="navbar-dropdown">
-                        <a href="/login" className="navbar-item" id="item_login">
-                            Login
-                        </a>
-                        <hr className="navbar-divider" />
-                        <a href="/registro" className="navbar-item" id="item_register">
-                            Registro
-                        </a>
-                    </div>
+                    <h3>Hi! Rishabh</h3>
                 </div>
             ) : (
                 <div className={styles.profile_2}>

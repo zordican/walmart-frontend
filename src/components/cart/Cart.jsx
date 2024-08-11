@@ -31,7 +31,7 @@ const Cart = () => {
       <div className="App">
       <div className='menu-container' ref={menuRef}>
         <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
-            <FontAwesomeIcon icon={faCartShopping} size='lg'/>
+            <FontAwesomeIcon icon={faCartShopping} size='lg' color='white'/>
         </div>
 
         <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >

@@ -20,7 +20,7 @@ function Navbar() {
       <div className={styles.search}>
         <form action="" className={styles.search_box}>
           <input className={styles.search_input} type="text" placeholder="Search everything at Walmart online and in store" />
-          <div className={styles.search_btn} type="submit"><FontAwesomeIcon icon={faMagnifyingGlass} size='lg' className={styles.search_icon}/></div>
+          <div className={styles.search_btn} type="submit"><FontAwesomeIcon icon={faMagnifyingGlass} size='lg' className={styles.search_icon} color="white"/></div>
         </form>
       </div>
 
