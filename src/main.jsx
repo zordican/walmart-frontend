@@ -10,16 +10,17 @@ import Profile from './components/profile/Profile.jsx';
 import Login from './components/Login/Login.jsx';
 import Signup from './components/Signup/Signup.jsx';
 import Logout from './components/logout/Logout.jsx';
-import SharedCart from './components/SharedCart/SharedCart.jsx';
+import SharedCart from './components/CreateSharedCart/CreateSharedCart.jsx';
 import JoinCart from './components/JoinCart/JoinCart.jsx';
 import HomePage from './components/HomePage/HomePage.jsx';
 //import UserSharedCartsPage from './components/pages/UserSharedCartsPage.jsx';
  import SharedCartPage from './components/pages/SharedCartPage.jsx';
+ import SetCardId from './components/cartIdSet/SetCartId.jsx';
 
 
 const router = createBrowserRouter([
   { path: "/",element: <App />,},
-  { path: "/cart", element: <SharedCart/>},
+ // { path: "/cart", element: <SharedCart/>},
   { path: "/cards", element: <ItemCard/>},
   { path: "/profile", element: <Profile/>},
   { path: "/login", element: <Login />},
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
   { path: "/joincart", element: <JoinCart/>},
   { path: "/homepage", element: <HomePage/>},
   { path: "/carted", element: <SharedCartPage/>},
+  { path: "/setcartid", element: <SetCardId/>},
 // { path: "/user/sharedcarts", element: <UserSharedCartsPage/>},
 ]);
 

@@ -2,17 +2,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const SharedCarts = () => {
+const SetCardId = () => {
   const [joinedCarts, setJoinedCarts] = useState([]);
 
   useEffect(() => {
     const fetchJoinedCarts = async () => {
       try {
-        const response = await axios.get(`/api/cart/joinedCarts`);
+        const response = await axios.get(`/api/cart/joinedcarts`);
         setJoinedCarts(response.data);
+        console.log(response);
       } catch (err) {
         console.error('Error fetching joined carts:', err);
       }
+      console.log(response);
     };
 
     fetchJoinedCarts();
@@ -40,4 +42,4 @@ const SharedCarts = () => {
   );
 };
 
-export default SharedCarts;
+export default SetCardId;

@@ -45,8 +45,8 @@ const JoinCart = () => {
       {cart && (
         <div className={styles.cartDetails}>
           <h3>Shared Cart Details</h3>
-          <p>Cart Name: {cart.name}</p>
-          <p>Invitation Link: {cart.invitationLink}</p>
+          <p>Cart Name: {cart.ownerName}</p>
+          <p>Shared Cart ID: {cart.cartId}</p>
           {/* Add more cart details or options to add products here */}
         </div>
       )}
