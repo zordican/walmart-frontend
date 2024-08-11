@@ -23,7 +23,7 @@ function SharedCart() {
       price: 5999,
       quantity: 1,
       stock: 5,
-      byId: "Niraj"
+      byId: "Hraday"
     },
     {
       productId: "125",
@@ -45,35 +45,35 @@ function SharedCart() {
     },
     {
       productId: "127",
-      photo: "/",
-      name: "Sample Product 5",
-      price: 299.99,
-      quantity: 1,
+      photo: "https://i5.walmartimages.com/seo/Mainstays-Comfort-Complete-Bed-Pillow-Standard-Queen_04754ad9-e885-4aa4-b2b1-bff2366cf575.0b8fd924fcff296303a5c76ff6d1a55b.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF",
+      name: "Mainstays Comfort Complete Bed Pillow (2 pieces)",
+      price: 429.99,
+      quantity: 2,
       stock: 5,
-      byId: "Hraday"
+      byId: "Rishabh"
     },
     {
       productId: "128",
-      photo: "/",
-      name: "Sample Product 6",
-      price: 299.99,
+      photo: "https://i5.walmartimages.com/seo/Disney-100th-Anniversary-Men-s-Big-Men-s-Mickey-Mouse-Faces-Graphic-Tee-Shirts-Sizes-S-3XL_6ecbfcec-fdd1-412c-83c9-9ff5531d1945.bae63c48966ac93760daebbbdedcaa28.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      name: "Disney 100 100th Anniversary Men's & Big Men's Mickey Mouse Faces and Time Flies Graphic Tee Shirts 2-Pack, Sizes S-3XL",
+      price: 799.99,
       quantity: 1,
       stock: 5,
-      byId: "Hraday"
+      byId: "Niraj"
     },
     {
       productId: "129",
-      photo: "/",
-      name: "Sample Product 7",
+      photo: "https://i5.walmartimages.com/seo/Lepro-LED-Collapsible-Camping-Lantern-4-Packs-Super-Bright-Battery-Powered-Light-IPX4-Water-Resistant-Portable-Emergency-Lights-Power-Outage-Hurrican_9df9e775-ad5d-4c95-8e5d-7a3af32eeec0.7c37de070d7ed064bd2fbd5d7385befe.png?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      name: "Lepro LED Collapsible Camping Lantern 4-Packs, Super Bright, Battery Powered Camping Light, IPX4 Water Resistant",
       price: 299.99,
       quantity: 1,
       stock: 5,
-      byId: "Hraday"
+      byId: "Niraj"
     },
     {
       productId: "130",
-      photo: "/",
-      name: "Sample Product 8",
+      photo: "https://i5.walmartimages.com/seo/Bose-SoundLink-Flex-Wireless-Waterproof-Portable-Bluetooth-Speaker-Black_e3682e2c-1160-4a6b-b96a-50a7e8b8c045.23c03d5d3fdf6ae1aa19975a180fbf32.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      name: "Bose SoundLink Flex Wireless Waterproof Portable Bluetooth Speaker, Black",
       price: 299.99,
       quantity: 1,
       stock: 5,
@@ -81,17 +81,17 @@ function SharedCart() {
     },
     {
       productId: "131",
-      photo: "/",
-      name: "Sample Product 9",
-      price: 299.99,
+      photo: "https://i5.walmartimages.com/seo/Pocket-Juice-Slim-Pro-20-000mAh-Portable-Power-Bank-and-Charger-with-Dual-USB-Ports-Black_387948b6-ba8a-4a43-9b08-3d49f781ba76.3933f6708f940ff3e3e81a5d45f30fdc.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      name: "Pocket Juice Slim Pro 20,000mAh, Portable Power Bank and Charger with Dual USB Ports, Black",
+      price: 1299.99,
       quantity: 1,
       stock: 5,
       byId: "Hraday"
     },
     {
       productId: "132",
-      photo: "/",
-      name: "Sample Product 10",
+      photo: "https://i5.walmartimages.com/seo/Freshness-Guaranteed-Chocolate-Chip-Bakery-Cookies-14-oz-10-Count_b8ff1c98-71aa-4cb8-8cd4-018ab0b2ac50.52b12ed2c82a7d96fe7dd87f10088782.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      name: "Freshness Guaranteed Chocolate Chip Bakery Cookies, 14 oz, 10 Count",
       price: 149.99,
       quantity: 3,
       stock: 8,
