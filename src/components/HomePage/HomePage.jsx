@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const HomePage = () => {
+  const cartId = localStorage.getItem('currentCartId');
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
 
@@ -57,7 +58,7 @@ const HomePage = () => {
               <div className="product-actions">
                 <button onClick={() => addToCart(product.id)}>Add to Cart</button>
                 {/* Add your shared cart ID here or implement a UI to choose a shared cart */}
-                <button onClick={() => addToSharedCart(product.id, 'sharedCartId')}>Add to Shared Cart</button>
+                <button onClick={() => addToSharedCart(product.id, cartId)}>Add to Shared Cart</button>
               </div>
             </div>
           </li>
