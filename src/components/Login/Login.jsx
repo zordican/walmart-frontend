@@ -18,6 +18,12 @@ const Login = () => {
       if (response.data.message === 'Login successful') {
         console.log('Login successful');
         localStorage.setItem('token', response.data.token);
+
+        // Store the cart ID in localStorage if it exists
+        if (response.data.cartId) {
+          localStorage.setItem('currentCartId', response.data.cartId);
+        }
+
         navigate('/'); // Redirect to home page after successful login
       }
     } catch (err) {

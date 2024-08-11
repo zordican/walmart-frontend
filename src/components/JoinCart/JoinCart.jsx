@@ -17,9 +17,25 @@ const JoinCart = () => {
         { withCredentials: true }
       );
       setCart(response.data);
-      setError('');
-    } catch (err) {
-      setError('Error joining cart. Please check the invitation link.');
+    setError('');
+     } catch (err) {
+      if (err.response) {
+        if (err.response.status === 400) {
+          const { message } = err.response.data;
+          if (message === 'You have already joined this cart') {
+            setError('You have already joined this cart or You cannot join your own cart.');
+          } else if (message === 'You cannot join your own cart') {
+            setError('You cannot join your own cart or You have already joined this cart.');
+          } else {
+            setError('Error joining cart. Please check the invitation link.');
+          }
+        } else {
+          setError('Error joining cart. Please check the invitation link.');
+        }
+      } else {
+        setError('Error joining cart. Please check the invitation link.');
+      }
+      setCart(null);
       console.error(err);
     }
   };

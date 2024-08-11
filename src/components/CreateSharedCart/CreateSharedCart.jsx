@@ -36,7 +36,12 @@ useEffect(() => {
   const handleCreateCart = async () => {
     try {
       const response = await axios.post('/api/cart/create', { name: username }, { withCredentials: true });
+
+      // Store the cartId in localStorage
+      localStorage.setItem('currentCartId', response.data.cartId);
+
       setInvitationLink(response.data.invitationLink);
+
     } catch (err) {
       setError('Error creating cart');
       console.error(err);
