@@ -55,7 +55,23 @@ export const login = async (req, res) => {
     const token = jwt.sign({ userId: existingUser.id }, process.env.JWT_SECRET, { expiresIn: '24h' });
     res.cookie('jwt', token, { httpOnly: true, maxAge: 3600000 });
 
-    return res.json({ message: 'Login successful', user: existingUser, token : token,});
+    // Check if the user has a previously generated shared cart
+    const userCart = await prisma.userCart.findFirst({
+      where: { userId: existingUser.id },
+      include: { cart: true }
+    });
+
+    let cartId = null;
+    if (userCart) {
+      cartId = userCart.cart.id;
+    }
+
+    return res.json({ 
+      message: 'Login successful', 
+      user: existingUser, 
+      token: token, 
+      cartId: cartId 
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: 'Internal Server Error' });

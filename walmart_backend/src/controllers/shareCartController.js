@@ -4,7 +4,7 @@ import prisma from '../models/prismaClient.js';
 export const createCart = async (req, res) => {
   const { name } = req.body;
   const userId = req.user.id;
-
+  try{
   // Check if a cart with the given name and user already exists
   const existingCart = await prisma.cart.findFirst({
     where: {
@@ -19,9 +19,11 @@ export const createCart = async (req, res) => {
 
   // If the cart exists, return it
   if (existingCart) {
-    return res.status(200).json(existingCart);
+    return res.status(200).json({
+      cartId: existingCart.id,
+      invitationLink: existingCart.invitationLink,
+    });
   }
-
   
   const cart = await prisma.cart.create({
     data: {
@@ -33,7 +35,16 @@ export const createCart = async (req, res) => {
     },
   });
 
-  res.status(201).json(cart);
+  // Return the new cart's ID and invitation link
+  res.status(201).json({
+    cartId: cart.id,
+    invitationLink: cart.invitationLink,
+  });
+} catch (err) {
+  console.error(err);
+  res.status(500).json({ error: 'Failed to create cart' });
+}
+
 };
 
 export const joinCart = async (req, res) => {
@@ -53,6 +64,23 @@ export const joinCart = async (req, res) => {
   });
   if (!cart) {
     return res.status(404).send('Cart not found');
+  }
+
+// Check if the user is the owner of the cart
+const isOwner = cart.users.some(userCart => userCart.userId === userId);
+if (isOwner) {
+  return res.status(400).json({ message: 'You cannot join your own cart' });
+}
+
+  // Check if the user has already joined the cart
+  const existingUserCart = await prisma.userCart.findFirst({
+    where: {
+      userId: userId,
+      cartId: cart.id
+    }
+  });
+  if (existingUserCart) {
+    return res.status(400).json({ message: 'You have already joined this cart' });
   }
 
   await prisma.userCart.create({
