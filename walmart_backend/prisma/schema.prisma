@@ -35,6 +35,7 @@ model Product {
   id            String        @id @default(auto()) @map("_id") @db.ObjectId
   name          String
   price         Float
+  imageUrl  String   @default("https://example.com/default-image.png") // Default image URL
   voteCount     Int           @default(0)
   rating        Float
   numRatings    Int
@@ -46,7 +47,8 @@ model CartProduct {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   cartId    String   @db.ObjectId
   productId String   @db.ObjectId
-
+  username  String   // Store the username directly
+  
   cart      Cart     @relation(fields: [cartId], references: [id], name: "CartProducts")
   product   Product  @relation(fields: [productId], references: [id], name: "ProductCartProducts")
 }
