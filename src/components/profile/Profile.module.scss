@@ -1,26 +1,103 @@
-.profile_2{
-    font-size: 1.125rem;
-}
-
-.profile_2{
-    width: 10rem;
-    .items_Button{
-        .icon{
-            padding-right: 0.5rem ;
-        }
-        background: #0071ce;
-        border-radius: 5rem;
-        border: none;
-        text-decoration: solid;
-        text-align: left;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        .reorder{
-            font-size: 0.8rem;
-        }
-    }
-    .items_Button:hover{
-        background-color: #1a1717;
-    }
-}
+.profile_1, .profile_2 {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .profile_2 {
+    cursor: pointer;
+  }
+  
+  .items_Button {
+    background-color: #f3f4f6;
+    border: none;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .items_Button:hover {
+    background-color: #e2e6ea;
+  }
+  
+  .icon {
+    font-size: 1.5rem;
+    color: #0073e6;
+    margin-right: 10px;
+  }
+  
+  .reorder {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .dropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    margin-top: 10px;
+  }
+  
+  .dropdownItem {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdownItem:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .dropdownItem:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .navbar-item {
+    display: block;
+    padding: 8px 16px;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navbar-item:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .navbar-divider {
+    margin: 0;
+    border-top: 1px solid #ddd;
+  }
+  
+  .navbar-dropdown {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+  }
+  
+  img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  

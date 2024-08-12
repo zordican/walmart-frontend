@@ -1,10 +1,9 @@
-// components/SharedCarts.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 const SetCardId = () => {
   const [joinedCarts, setJoinedCarts] = useState([]);
-
+  const navigate = useNavigate(); // Hook for navigation
   useEffect(() => {
     const fetchJoinedCarts = async () => {
       try {
@@ -14,18 +13,15 @@ const SetCardId = () => {
       } catch (err) {
         console.error('Error fetching joined carts:', err);
       }
-      console.log(response);
     };
-
     fetchJoinedCarts();
   }, []);
-
   const handleCartClick = (cartId) => {
     // Store the selected cartId in localStorage
     localStorage.setItem('currentCartId', cartId);
-    alert('Cart selected');
+    // Redirect to the /carted route
+    navigate('/carted');
   };
-
   return (
     <div>
       <h2>Your Joined Carts</h2>

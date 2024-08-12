@@ -1,69 +1,72 @@
-import {useState, useEffect, useRef} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
-import './Cart.css'
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { useState, useEffect, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping, faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import './Cart.css';
 
 const Cart = () => {
-    
-    const [open, setOpen] = useState(false);
-
+  const [open, setOpen] = useState(false);
   let menuRef = useRef();
+  let navigate = useNavigate();
 
   useEffect(() => {
-    let handler = (e)=>{
-      if(!menuRef.current.contains(e.target)){
+    let handler = (e) => {
+      if (!menuRef.current.contains(e.target)) {
         setOpen(false);
-        console.log(menuRef.current);
-      }      
+      }
     };
 
-    document.addEventListener("mousedown", handler);
-    
+    document.addEventListener('mousedown', handler);
 
-    return() =>{
-      document.removeEventListener("mousedown", handler);
-    }
-
+    return () => {
+      document.removeEventListener('mousedown', handler);
+    };
   });
-  return (
-    <div className = 'cart'>
-      <div className="App">
-      <div className='menu-container' ref={menuRef}>
-        <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
-            <FontAwesomeIcon icon={faCartShopping} size='lg'/>
-        </div>
 
-        <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
-          <h3>Choose Your Cart <br/><span>:)</span></h3>
-          <ul>
-           <DropdownItem/>
-           <DropdownItem2/>
-          </ul>
+  const handleNavigate = (path) => {
+    setOpen(false); // Close the dropdown menu after clicking
+    navigate(path); // Navigate to the specified path
+  };
+
+  return (
+    <div className='cart'>
+      <div className='App'>
+        <div className='menu-container' ref={menuRef}>
+          <div className='menu-trigger' onClick={() => setOpen(!open)}>
+            <FontAwesomeIcon icon={faCartShopping} size='lg' />
+          </div>
+
+          <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
+            <h3>
+              Choose Your Cart <br />
+              <span>:)</span>
+            </h3>
+            <ul>
+              <DropdownItem 
+                icon={faCartPlus} 
+                text="Shared Cart" 
+                onClick={() => handleNavigate('/setcartid')} 
+              />
+              <DropdownItem 
+                icon={faCartShopping} 
+                text="Cart" 
+                onClick={() => handleNavigate('/cart')} 
+              />
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-    </div>
-  )
+  );
+};
+
+function DropdownItem({ icon, text, onClick }) {
+  return (
+    <li className='dropdownItem' onClick={onClick}>
+      <FontAwesomeIcon icon={icon} size='lg' style={{ color: '#000000' }} />
+      <a>{text}</a>
+    </li>
+  );
 }
 
-function DropdownItem(){
-    return(
-      <li className = 'dropdownItem'>
-        <FontAwesomeIcon icon={faCartPlus} size='lg' style={{color: "#000000",}}/>
-        <a> Shared Cart </a>
-      </li>
-    );
-  }
-
-  function DropdownItem2(){
-    return(
-      <li className = 'dropdownItem'>
-        <FontAwesomeIcon icon={faCartShopping} size='lg' style={{color: "#000000",}}/>
-        <a> Cart </a>
-      </li>
-    );
-  }
-  
-
-export default Cart
+export default Cart;
