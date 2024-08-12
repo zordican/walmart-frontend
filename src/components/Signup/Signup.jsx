@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import styles from './Signup.module.scss';
+import './signup.css'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -28,23 +28,50 @@ const Signup = () => {
   };
 
   return (
-    <div className={styles.signupContainer}>
-      <h2>Signup</h2>
-      <form onSubmit={handleSignup}>
-        <div className={styles.formGroup}>
-          <label htmlFor="username">Username:</label>
-          <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
+    <div className="login-container">
+      
+      <form className="login-form" onSubmit={handleSignup}>
+      <div className="image-container"><img src="https://res.cloudinary.com/dp3aoinmu/image/upload/v1723269218/Walmart_PNG/nkf7aa9iz6vqobaowd8k.jpg" alt="" /></div>
+        <h2>Signup</h2>
+
+        <div className="input-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
         </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <div className="input-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <div className="input-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </div>
-        {error && <div className={styles.error}>{error}</div>}
-        <button type="submit">Signup</button>
+        {error && <div>{error}</div>}
+        <button type="submit" className="login-button">
+          Signup
+        </button>
+        <div className="account-option">
+      <span>Already have an account? </span>
+      <a href="/login">Sign in</a>
+    </div>
       </form>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import styles from './Login.module.scss';
+import './login.css';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -32,7 +32,7 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.loginContainer}>
+    /* <div className={styles.loginContainer}>
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div className={styles.formGroup}>
@@ -50,7 +50,54 @@ const Login = () => {
         {error && <div className={styles.error}>{error}</div>}
         <button type="submit">Login</button>
       </form>
+    </div> */
+    <div className="login-container">
+      
+      <form className="login-form" onSubmit={handleLogin}>
+      <div className="image-container"><img src="https://res.cloudinary.com/dp3aoinmu/image/upload/v1723269218/Walmart_PNG/nkf7aa9iz6vqobaowd8k.jpg" alt="" /></div>
+        <h2>Sign in</h2>
+
+        <div className="input-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        {error && <div>{error}</div>}
+        <button type="submit" className="login-button">
+          Login
+        </button>
+        <div className="account-option">
+      <span>Don't have an account? </span>
+      <a href="/signup">Sign Up</a>
     </div>
+      </form>
+    </div>
+
   );
 };
 
