@@ -24,7 +24,7 @@ export const createCart = async (req, res) => {
       invitationLink: existingCart.invitationLink,
     });
   }
-  
+
   const cart = await prisma.cart.create({
     data: {
       name,
@@ -187,10 +187,10 @@ export const allProducts =  async (req, res) => {
   }
 };
 
-// Endpoint: Add a product to a shared cart
 export const addProductToSharedCart = async (req, res) => {
   const { productId } = req.body;
   const { cartId } = req.params; // Get cartId from the request parameters
+  const userId = req.user.id; // Assuming user is authenticated and user ID is available
 
   try {
     // Check if the shared cart exists and the user is part of it
@@ -198,7 +198,7 @@ export const addProductToSharedCart = async (req, res) => {
       where: { id: cartId },
       include: {
         users: {
-          where: { userId: req.user.id }, // Assuming user is authenticated and user ID is available
+          where: { id: userId }, // Check if the user is part of the shared cart
         },
       },
     });
@@ -207,11 +207,22 @@ export const addProductToSharedCart = async (req, res) => {
       return res.status(404).json({ error: 'Shared cart not found or you do not have access to it' });
     }
 
-    // Add the product to the shared cart
+    // Fetch the user's username
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { name: true }, // Select only the name field
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Add the product to the shared cart with the username
     await prisma.cartProduct.create({
       data: {
         cartId: sharedCart.id,
         productId,
+        username: user.name, // Store the username who added the product
       },
     });
 
@@ -221,6 +232,8 @@ export const addProductToSharedCart = async (req, res) => {
     res.status(500).json({ error: 'Error adding product to shared cart' });
   }
 };
+
+
 
 
 
