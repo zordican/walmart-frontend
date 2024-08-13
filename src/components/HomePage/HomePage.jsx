@@ -17,15 +17,9 @@ const HomePage = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      try {
         const response = await axios.get('/api/cart/products'); // Fetch products from backend
         setProducts(response.data);
-      } catch (err) {
-        setError('Error fetching products');
-        //console.error(err);
-      }
     };
-
     fetchProducts();
   }, []);
 
@@ -55,32 +49,30 @@ const HomePage = () => {
       <br /> <br />
       <h1>Products</h1>
       <section className={styles.mainContainer}>
-      <div className={styles.productContainer}>
-        {products.map(product => (
-          <div className={styles.mainItemContainer}>
-          <div className={styles.imageItemContainer}>
-            <img src="https://rukminim2.flixcart.com/image/850/1000/xif0q/cookie-biscuit/z/j/y/-original-imagwcjwgscghbdz.jpeg?q=90&crop=false" alt={product.name} />
-          </div>
-          <div className={styles.buttonsItemContainer}>
-            <div className={styles.addToCart}>
-              <FontAwesomeIcon icon={faPlus} size='lg' className={styles.plus_icon} />
-              <p>Add to cart</p>
+        <div className={styles.productContainer}>
+          {products.map(product => (
+            <div key={product.id} className={styles.mainItemContainer}>
+              <div className={styles.imageItemContainer}>
+                <img src={product.imageUrl} alt={product.name} />
+              </div>
+              <div className={styles.buttonsItemContainer}>
+                <div className={styles.addToCart} onClick={() => addToCart(product.id)}>
+                  <FontAwesomeIcon icon={faPlus} size='lg' className={styles.plus_icon} />
+                  <p>Add to cart</p>
+                </div>
+                <div className={styles.addToSharedCart}>
+                  <FontAwesomeIcon icon={faCartPlus} size='lg' />
+                  <p onClick={() => addToSharedCart(product.id, cartId)} className={styles.sharedCartText}> Add to <br />Shared cart </p>
+                </div>
+              </div>
+              <div className={styles.price}><p>₹{product.price}</p></div>
+              <div className={styles.description}><p>{product.name}</p></div>
             </div>
-            <div className={styles.addToSharedCart}>
-              <FontAwesomeIcon icon={faCartPlus} size='lg' />
-              <p onClick={() => addToSharedCart(product.id, cartId)} className={styles.sharedCartText}> Add to <br />Shared cart </p>
-            </div>
-          </div>
-          <div className={styles.price}><p>₹{product.price}</p></div>
-          <div className={styles.description}><p>{product.name}</p></div>
+          ))}
         </div>
-        ))}
-      </div>
       </section>
-      
     </div>
   );
 };
 
 export default HomePage;
-

@@ -21,11 +21,20 @@ const Cart = () => {
     return () => {
       document.removeEventListener('mousedown', handler);
     };
-  });
+  }, []);
 
   const handleNavigate = (path) => {
     setOpen(false); // Close the dropdown menu after clicking
     navigate(path); // Navigate to the specified path
+  };
+
+  const handleSharedCartClick = () => {
+    const cartId = localStorage.getItem('currentCartId');
+    if (cartId) {
+      handleNavigate('/setcartid'); // Redirect to /setcartid if cart ID exists
+    } else {
+      handleNavigate('/sharedcart'); // Redirect to /sharedcart if cart ID does not exist
+    }
   };
 
   return (
@@ -45,7 +54,7 @@ const Cart = () => {
               <DropdownItem 
                 icon={faCartPlus} 
                 text="Shared Cart" 
-                onClick={() => handleNavigate('/setcartid')} 
+                onClick={handleSharedCartClick} 
               />
               <DropdownItem 
                 icon={faCartShopping} 
