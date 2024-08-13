@@ -68,7 +68,7 @@ const HomePage = () => {
             </div>
             <div className={styles.addToSharedCart}>
               <FontAwesomeIcon icon={faCartPlus} size='lg' />
-              <p> <Link to='/cart' onClick={() => addToSharedCart(product.id, cartId)} className={styles.sharedCartText}> Add to <br />Shared cart </Link></p>
+              <p onClick={() => addToSharedCart(product.id, cartId)} className={styles.sharedCartText}> Add to <br />Shared cart </p>
             </div>
           </div>
           <div className={styles.price}><p>₹{product.price}</p></div>

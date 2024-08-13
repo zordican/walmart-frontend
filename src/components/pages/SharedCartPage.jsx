@@ -53,27 +53,8 @@ const SharedCartPage = () => {
   //   console.log("Removing item with id", id);
   // };
   return (
-    <div>
+      <div>
       <Navbar />
-      {/* <h1>Shared Cart Products</h1> */}
-
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-
-      {sharedCartProducts.length === 0 ? (
-        <p>No products in the shared cart.</p>
-      ) : (
-        // <ul>
-        //   {sharedCartProducts.map((product) => (
-        //     <li key={product.productId}>
-        //       <h3>{product.name}</h3>
-        //       <p>Price: ${product.price}</p>
-        //       <p>Rating: {product.rating} ({product.numRatings} ratings)</p>
-        //       {/* <p>Vote Count: {product.voteCount}</p> */}
-              <p>Added by: {product.addedBy}</p> {/* Display the username */}
-              <p>imageUrl: {product.imageUrl}</p>
-        //     </li>
-        //   ))}
-        // </ul>
         <div>
         <br /><br />
       <h1>Shared Shopping Cart</h1>
@@ -86,6 +67,8 @@ const SharedCartPage = () => {
           price={item.price}
           rating={item.rating}
           numRatings={item.numRatings}
+          addedBy = {item.addedBy}
+          imageUrl = {item.imageUrl}
           // incrementHandler={incrementHandler}
           // decrementHandler={decrementHandler}
           // removeHandler={removeHandler}
@@ -110,11 +93,9 @@ const SharedCartPage = () => {
         
     </aside>
     </section>
-        
     </div>
-      )}
     </div>
-  );
+  )
 };
 
 export default SharedCartPage;
