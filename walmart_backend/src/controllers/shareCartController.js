@@ -315,28 +315,24 @@ export const voteProduct = async (req, res) => {
   }
 };
 
+export const deleteProduct = async (req, res) => {
+  const { cartId, productId } = req.params;
 
-// export const getCart = async (req, res) => {
-//   const { cartId } = req.params;
+  try {
+    // Remove the product from the cart
+    await prisma.cartProduct.deleteMany({
+      where: {
+        cartId: cartId,
+        productId: productId,
+      },
+    });
 
-//   if (!cartId) {
-//     return res.status(400).json({ error: "Cart ID is required." });
-//   }
+    res.status(200).json({ message: 'Product removed from shared cart' });
+  } catch (error) {
+    console.error('Error removing product from shared cart:', error);
+    res.status(500).json({ error: 'An error occurred while removing the product from the cart' });
+  }
+};
 
-//   try {
-//     const cartProducts = await prisma.cartProduct.findMany({
-//       where: { cartId },
-//     });
 
-//     if (cartProducts.length === 0) {
-//       return res.status(404).json({ error: "No products found in this cart." });
-//     }
 
-//     const productIds = cartProducts.map(cp => cp.productId);
-
-//     res.status(200).json(productIds);
-//   } catch (error) {
-//     console.error("Error fetching products from cart:", error);
-//     res.status(500).json({ error: "An error occurred while fetching products from the cart." });
-//   }
-// };
