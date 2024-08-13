@@ -71,7 +71,7 @@
         transition: background-color 0.3s ease;
 
         &:hover {
-            background-color: #005a9e;
+            background-color: #0071ce;
             cursor: pointer;
         }
 
@@ -110,34 +110,9 @@
         margin-bottom: 1rem;
     }
 }
-
 .sharedCartText {
     color: white;
     font-weight: 400;
 }
-.location {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    background-color: #f3f4f6; /* Light grey background similar to Walmart's */
-    border-radius: 4px;
-    color: #333; /* Dark text color */
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 
-    &:hover {
-        background-color: #e2e3e5; /* Slightly darker on hover */
-    }
-
-    .locationIcon {
-        margin-right: 0.5rem; /* Space between icon and text */
-        color: #0071ce; /* Walmart's signature blue color */
-    }
-
-    .locationText {
-        font-weight: 600; /* Slightly bold text for prominence */
-        text-align: left;
-    }
-}
 

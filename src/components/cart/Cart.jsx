@@ -2,15 +2,16 @@ import { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import './Cart.css';
+import './Cart.css'; // Ensure your CSS file is imported
 
 const Cart = () => {
   const [open, setOpen] = useState(false);
-  let menuRef = useRef();
-  let navigate = useNavigate();
+  const [shake, setShake] = useState(false); // State for shake effect
+  const menuRef = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    let handler = (e) => {
+    const handler = (e) => {
       if (!menuRef.current.contains(e.target)) {
         setOpen(false);
       }
@@ -37,12 +38,21 @@ const Cart = () => {
     }
   };
 
+  const toggleDropdown = () => {
+    setOpen(!open);
+    setShake(true); // Trigger shake on click
+    setTimeout(() => setShake(false), 500); // Remove shake after animation duration
+  };
+
   return (
     <div className='cart'>
       <div className='App'>
         <div className='menu-container' ref={menuRef}>
-          <div className='menu-trigger' onClick={() => setOpen(!open)}>
-            <FontAwesomeIcon icon={faCartShopping} size='lg' />
+          <div 
+            className={`menu-trigger ${shake ? 'shake' : ''}`} // Add shake class
+            onClick={toggleDropdown}
+          >
+            <FontAwesomeIcon icon={faCartShopping} size='lg' color='white'/>
           </div>
 
           <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>

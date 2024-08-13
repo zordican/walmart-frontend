@@ -5,7 +5,6 @@ import CartItem from './CartItem';
 import { Link } from 'react-router-dom';
 import Navbar from '../navbar/Navbar';
 
-
 const SharedCartPage = () => {
   const [sharedCartProducts, setSharedCartProducts] = useState([]);
   const [error, setError] = useState(null);
@@ -28,74 +27,56 @@ const SharedCartPage = () => {
   const subtotal = sharedCartProducts.reduce((accumulator, item) => {
     return accumulator + item.price;
   }, 0).toFixed(2);
-  // const subtotal = 4000;
-  const tax = Math.round(subtotal*0.18);
+  
+  const tax = Math.round(subtotal * 0.18);
   const shippingCharges = (subtotal > 1000 ? 0 : 40);
   const discount = (subtotal > 500) ? 400 : 0;
   const calctotal = subtotal + tax + shippingCharges - discount;
   const total = calctotal.toFixed(2);
 
-  // const incrementHandler = (cartItem) => {
-  //   console.log("Incrementing quantity for", cartItem.name);
-  //   if(cartItem.quantity < cartItem.stock){
-  //     cartItem.quantity = cartItem.quantity + 1;
-  //   }
-  // };
-  
-  // const decrementHandler = (cartItem) => {
-  //   console.log("Decrementing quantity for", cartItem.name);
-  //   if(cartItem.quantity > 0){
-  //     cartItem.quantity = cartItem.quantity - 1;
-  //   }
-  // };
-  
-  // const removeHandler = (id) => {
-  //   console.log("Removing item with id", id);
-  // };
   return (
-      <div>
+    <div>
       <Navbar />
-        <div>
+      <div>
         <br /><br />
-      <h1>Shared Shopping Cart</h1>
-      <section className={styles.cart}>
-      <main>
-      {sharedCartProducts.map((item) => (
-        <CartItem
-          key={item.productId}
-          name={item.name}
-          price={item.price}
-          rating={item.rating}
-          numRatings={item.numRatings}
-          addedBy = {item.addedBy}
-          imageUrl = {item.imageUrl}
-          // incrementHandler={incrementHandler}
-          // decrementHandler={decrementHandler}
-          // removeHandler={removeHandler}
-        />
-      ))}
-      </main>
-      <aside className={styles.calcSection}>
-      <button>
-        { sharedCartProducts.length > 0 && 
-          <Link to="/"> Continue to checkout</Link>
-        }
-        </button>
-      <p>GST: ₹{tax}</p>
-      <p>Subtotal (Incl. GST): ₹{subtotal}</p>
-      <p>Shipping Charges (Incl. GST): ₹{shippingCharges}</p>
-      <p> Discount:  
-        <em className="green">&nbsp; - ₹{discount}</em>
-      </p>
-      <p>
-        <b> Total: ₹{(calctotal + shippingCharges).toFixed(2)}</b>
-      </p>
-        
-    </aside>
-    </section>
+        <h1>Shared Shopping Cart</h1>
+        <section className={styles.cart}>
+          <main>
+            {sharedCartProducts.map((item) => (
+              <CartItem
+                key={item.productId}
+                name={item.name}
+                price={item.price}
+                rating={item.rating}
+                numRatings={item.numRatings}
+                addedBy={item.addedBy}
+                imageUrl={item.imageUrl}
+              />
+            ))}
+          </main>
+          <aside className={styles.calcSection}>
+            <button>
+              {sharedCartProducts.length > 0 && 
+                <Link to="/">Continue to checkout</Link>
+              }
+            </button>
+            <button>
+              <Link to="/sharedcart">Share Your Cart</Link>
+            </button>
+            <p>GST: ₹{tax}</p>
+            <p>Subtotal (Incl. GST): ₹{subtotal}</p>
+            <p>Shipping Charges (Incl. GST): ₹{shippingCharges}</p>
+            <p>Discount:  
+              <em className="green">&nbsp; - ₹{discount}</em>
+            </p>
+            <p>
+              <b>Total: ₹{(calctotal + shippingCharges).toFixed(2)}</b>
+            </p>
+          </aside>
+        </section>
+      </div>
     </div>
-    </div>
-  )
+  );
 };
 
 export default SharedCartPage;
