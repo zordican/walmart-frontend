@@ -2,6 +2,13 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Navbar from '../navbar/Navbar';
+import styles from './HomePage.module.scss';
+// import ItemCard from './ItemCard';
+import { faPlus, faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
+
 
 const HomePage = () => {
   const cartId = localStorage.getItem('currentCartId');
@@ -38,26 +45,33 @@ const HomePage = () => {
 
   return (
     <div>
+      <Navbar />
+      <br /> <br />
       <h1>Products</h1>
-      <ul>
+      <section className={styles.mainContainer}>
+      <div className={styles.productContainer}>
         {products.map(product => (
-          <li key={product.id}>
-            <div className="product-card">
-              <div className="product-details">
-                <h2>{product.name}</h2>
-                <p>Price: ${product.price}</p>
-                <p>Rating: {product.rating}</p>
-                <p>Number of Ratings: {product.numRatings}</p>
-              </div>
-              <div className="product-actions">
-                <button onClick={() => addToCart(product.id)}>Add to Cart</button>
-                {/* Add your shared cart ID here or implement a UI to choose a shared cart */}
-                <button onClick={() => addToSharedCart(product.id, cartId)}>Add to Shared Cart</button>
-              </div>
+          <div className={styles.mainItemContainer}>
+          <div className={styles.imageItemContainer}>
+            <img src="https://rukminim2.flixcart.com/image/850/1000/xif0q/cookie-biscuit/z/j/y/-original-imagwcjwgscghbdz.jpeg?q=90&crop=false" alt={product.name} />
+          </div>
+          <div className={styles.buttonsItemContainer}>
+            <div className={styles.addToCart}>
+              <FontAwesomeIcon icon={faPlus} size='lg' className={styles.plus_icon} />
+              <p>Add to cart</p>
             </div>
-          </li>
+            <div className={styles.addToSharedCart}>
+              <FontAwesomeIcon icon={faCartPlus} size='lg' />
+              <p onClick={() => addToSharedCart(product.id, cartId)} className={styles.sharedCartText}> Add to <br />Shared cart </p>
+            </div>
+          </div>
+          <div className={styles.price}><p>₹{product.price}</p></div>
+          <div className={styles.description}><p>{product.name}</p></div>
+        </div>
         ))}
-      </ul>
+      </div>
+      </section>
+      
     </div>
   );
 };
