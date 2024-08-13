@@ -1,4 +1,3 @@
-// Profile.jsx
 import styles from "./Profile.module.scss";
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
@@ -45,8 +44,10 @@ const Profile = () => {
     const handleLogout = async () => {
         try {
             await axios.post('/api/auth/logout', {}, { withCredentials: true });
-            localStorage.removeItem('token'); // Clear the token from localStorage
-            navigate('/login'); // Redirect to login page
+            localStorage.removeItem('token');
+            localStorage.removeItem('currentCartId');
+            // Refresh the page to reset the state
+            window.location.reload();
         } catch (error) {
             console.error('Error during logout:', error.message || 'An error occurred');
         }
@@ -57,11 +58,12 @@ const Profile = () => {
             {!navbarUserIsLogged ? (
                 <div className={styles.profile_2} ref={dropdownRef}>
                     <a href="/login">
-                    <a className={styles.items_Button} onClick={toggleDropdown}>
-                    <div className={styles.icon}><FontAwesomeIcon icon={faUser} /></div>
-                    <div><span className={styles.reorder}>Hi user</span><br />Sign in</div>
-                </a></a>
-            </div>
+                        <a className={styles.items_Button} onClick={toggleDropdown}>
+                            <div className={styles.icon}><FontAwesomeIcon icon={faUser} /></div>
+                            <div><span className={styles.reorder}>Hi user</span><br />Sign in</div>
+                        </a>
+                    </a>
+                </div>
             ) : (
                 <div className={styles.profile_2} ref={dropdownRef}>
                     <a className={styles.items_Button} onClick={toggleDropdown}>

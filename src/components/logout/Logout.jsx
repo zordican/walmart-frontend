@@ -6,12 +6,12 @@ const logout = async () => {
         // Make a request to the backend to clear the cookie
         await axios.post('/api/auth/logout', {}, { withCredentials: true });
 
-        // Clear the JWT token from localStorage
-        localStorage.removeItem('token');
+        // Clear the entire contents of localStorage
+        localStorage.clear();
 
         // Redirect to login page or home page
         const navigate = useNavigate();
-        navigate('/login'); // or navigate('/') for home page
+        navigate('/'); // or navigate('/') for home page
 
         console.log('Logout successful');
     } catch (err) {

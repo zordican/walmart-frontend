@@ -10,15 +10,9 @@ const HomePage = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      try {
         const response = await axios.get('/api/cart/products'); // Fetch products from backend
         setProducts(response.data);
-      } catch (err) {
-        setError('Error fetching products');
-        //console.error(err);
-      }
     };
-
     fetchProducts();
   }, []);
 

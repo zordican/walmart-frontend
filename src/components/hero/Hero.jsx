@@ -5,7 +5,6 @@ function Hero() {
     <div>
       <Navbar/>
       <HomePage/>
-      hero section
     </div>
   )
 }

@@ -1,36 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import styles from './CreateSharedCart.module.scss';
 
 const SharedCart = () => {
   const [username, setUsername] = useState('');
   const [invitationLink, setInvitationLink] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Use navigate for redirection
 
   // Fetch user details on component mount
-useEffect(() => {
-  const fetchUser = async () => {
-    try {
-      const response = await fetch('/api/auth/check', {
-        method: 'GET',
-        credentials: 'include', // Include cookies in the request
-      });
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch('/api/auth/check', {
+          method: 'GET',
+          credentials: 'include', // Include cookies in the request
+        });
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch user details');
+        if (!response.ok) {
+          throw new Error('Failed to fetch user details');
+        }
+
+        const data = await response.json();
+        setUsername(data.user.name);
+      } catch (err) {
+        setError('Error fetching user details');
+        console.error(err);
       }
+    };
 
-      const data = await response.json();
-      setUsername(data.user.name);
-    } catch (err) {
-      setError('Error fetching user details');
-      console.error(err);
-    }
-  };
-
-  fetchUser();
-}, []);
-
+    fetchUser();
+  }, []);
 
   // Create cart with invitation link
   const handleCreateCart = async () => {
@@ -41,7 +42,6 @@ useEffect(() => {
       localStorage.setItem('currentCartId', response.data.cartId);
 
       setInvitationLink(response.data.invitationLink);
-
     } catch (err) {
       setError('Error creating cart');
       console.error(err);
@@ -52,6 +52,11 @@ useEffect(() => {
   const handleCopyLink = () => {
     navigator.clipboard.writeText(invitationLink);
     alert('Invitation link copied to clipboard!');
+  };
+
+  // Redirect to joinCart page
+  const handleJoinCart = () => {
+    navigate('/joinCart'); // Redirect to /joinCart page
   };
 
   return (
@@ -66,6 +71,7 @@ useEffect(() => {
         </div>
       )}
       {error && <div className={styles.error}>{error}</div>}
+      <button onClick={handleJoinCart} className={styles.joinCartButton}>Have a Link?</button> {/* New button */}
     </div>
   );
 };

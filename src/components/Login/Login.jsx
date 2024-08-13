@@ -23,7 +23,6 @@ const Login = () => {
         if (response.data.cartId) {
           localStorage.setItem('currentCartId', response.data.cartId);
         }
-
         navigate('/'); // Redirect to home page after successful login
       }
     } catch (err) {
