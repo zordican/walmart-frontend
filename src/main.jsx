@@ -31,7 +31,7 @@ const router = createBrowserRouter([
   { path: "/products", element: <HomePage/>},
   { path: "/carted", element: <SharedCartPage/>},
   { path: "/setcartid", element: <SetCardId/>},
-  { path : "/"}
+  
 // { path: "/user/sharedcarts", element: <UserSharedCartsPage/>},
 ]);
 

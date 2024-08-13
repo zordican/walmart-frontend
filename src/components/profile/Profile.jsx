@@ -55,18 +55,13 @@ const Profile = () => {
     return (
         <>
             {!navbarUserIsLogged ? (
-                <div className={styles.profile_1}>
-                    <img alt="user" />
-                    <div className="navbar-dropdown">
-                        <a href="/login" className="navbar-item" id="item_login">
-                            Login
-                        </a>
-                        <hr className="navbar-divider" />
-                        <a href="/signup" className="navbar-item" id="item_register">
-                            Registro
-                        </a>
-                    </div>
-                </div>
+                <div className={styles.profile_2} ref={dropdownRef}>
+                    <a href="/login">
+                    <a className={styles.items_Button} onClick={toggleDropdown}>
+                    <div className={styles.icon}><FontAwesomeIcon icon={faUser} /></div>
+                    <div><span className={styles.reorder}>Hi user</span><br />Sign in</div>
+                </a></a>
+            </div>
             ) : (
                 <div className={styles.profile_2} ref={dropdownRef}>
                     <a className={styles.items_Button} onClick={toggleDropdown}>
@@ -75,7 +70,7 @@ const Profile = () => {
                     </a>
                     {dropdownOpen && (
                         <div className={styles.dropdownMenu}>
-                            <a href="/switch-account" className={styles.dropdownItem}>Switch Account</a>
+                            <a href="/switch-account" className={styles.dropdownItem}>Orders</a>
                             <a className={styles.dropdownItem} onClick={handleLogout}>Sign Out</a>
                         </div>
                     )}
