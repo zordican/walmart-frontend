@@ -3,14 +3,16 @@ import Profile from "../profile/Profile"
 import styles from "./Navbar.module.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-
+import { Link } from "react-router-dom"
 
 function Navbar() {
   return (
     <nav className={styles.navbar}>
 
-      <div className = {styles.logo}>
+<div className = {styles.logo}>
+        <Link to={"/"}>
         <img src="https://res.cloudinary.com/dp3aoinmu/image/upload/v1722868874/Walmart_PNG/asdqtv2h8pcla1czjz0s.png" alt="Walmart" />
+        </Link>
       </div>
 
       <div className={styles.location}>

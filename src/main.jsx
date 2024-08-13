@@ -16,7 +16,7 @@ import HomePage from './components/HomePage/HomePage.jsx';
 //import UserSharedCartsPage from './components/pages/UserSharedCartsPage.jsx';
  import SharedCartPage from './components/pages/SharedCartPage.jsx';
  import SetCardId from './components/cartIdSet/SetCartId.jsx';
-
+import ShippingDetails from './components/ShippingDetails/ShippingDetails.jsx'
 
 const router = createBrowserRouter([
   { path: "/",element: <App />,},
@@ -31,6 +31,7 @@ const router = createBrowserRouter([
   { path: "/products", element: <HomePage/>},
   { path: "/carted", element: <SharedCartPage/>},
   { path: "/setcartid", element: <SetCardId/>},
+  { path: "/shippingDetails", element: <ShippingDetails /> },
   
 // { path: "/user/sharedcarts", element: <UserSharedCartsPage/>},
 ]);

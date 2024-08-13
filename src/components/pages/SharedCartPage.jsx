@@ -57,7 +57,7 @@ const SharedCartPage = () => {
       <Navbar />
         <div>
         <br /><br />
-      <h1>Shared Shopping Cart</h1>
+      <h2 className={styles.headingCart}>Shared Shopping Cart</h2>
       <section className={styles.cart}>
       <main>
       {sharedCartProducts.map((item) => (
@@ -78,7 +78,7 @@ const SharedCartPage = () => {
       <aside className={styles.calcSection}>
       <button>
         { sharedCartProducts.length > 0 && 
-          <Link to="/"> Continue to checkout</Link>
+          <Link to="/shippingDetails"> Continue to checkout</Link>
         }
         </button>
       <p>GST: ₹{tax}</p>
