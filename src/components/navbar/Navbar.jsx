@@ -3,8 +3,7 @@ import Profile from "../profile/Profile"
 import styles from "./Navbar.module.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-
-
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 function Navbar() {
   return (
     <nav className={styles.navbar}>
@@ -14,8 +13,12 @@ function Navbar() {
       </div>
 
       <div className={styles.location}>
-        To be done...
-      </div>
+  <FontAwesomeIcon icon={faMapMarkerAlt} className={styles.locationIcon} />
+  <div className={styles.locationText}>
+      Select your location
+  </div>
+</div>
+
 
       <div className={styles.search}>
         <form action="" className={styles.search_box}>
