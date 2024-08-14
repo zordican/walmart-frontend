@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../navbar/Navbar';
+import styles from './SetCardId.module.scss'; // Import your SCSS module
+
 const SetCardId = () => {
   const [joinedCarts, setJoinedCarts] = useState([]);
   const navigate = useNavigate(); // Hook for navigation
+
   useEffect(() => {
     const fetchJoinedCarts = async () => {
       try {
@@ -16,14 +20,17 @@ const SetCardId = () => {
     };
     fetchJoinedCarts();
   }, []);
+
   const handleCartClick = (cartId) => {
     // Store the selected cartId in localStorage
     localStorage.setItem('currentCartId', cartId);
     // Redirect to the /carted route
     navigate('/carted');
   };
+
   return (
-    <div>
+    <div className={styles.container}>
+      <Navbar />
       <h2>Your Joined Carts</h2>
       <ul>
         {joinedCarts.map(cart => (

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import styles from './CreateSharedCart.module.scss';
-
+import Navbar from '../navbar/Navbar';
 const SharedCart = () => {
   const [username, setUsername] = useState('');
   const [invitationLink, setInvitationLink] = useState('');
@@ -61,6 +61,7 @@ const SharedCart = () => {
 
   return (
     <div className={styles.sharedCartContainer}>
+      <Navbar />
       <h2>Welcome, {username}</h2>
       <button onClick={handleCreateCart}>Create Shared Cart</button>
       {invitationLink && (

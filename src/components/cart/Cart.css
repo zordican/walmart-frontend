@@ -8,7 +8,7 @@
 }
 
 .cart {
-  padding-right: 2rem;
+  padding-right: 3rem;
   transition: transform var(--speed) ease; /* Smooth transition for shake effect */
 }
 
