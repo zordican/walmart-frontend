@@ -24,10 +24,15 @@ const SharedCartPage = () => {
     fetchSharedCartProducts(); // Call the function to fetch products when the component mounts
   }, [cartId]); // Add cartId as a dependency so the effect runs if it changes
 
+  const handleProductRemove = (productId) => {
+    setSharedCartProducts(prevProducts => prevProducts.filter(product => product.productId !== productId));
+  };
+
   const subtotal = sharedCartProducts.reduce((accumulator, item) => {
     return accumulator + item.price;
   }, 0).toFixed(2);
   
+
   const tax = Math.round(subtotal * 0.18);
   const shippingCharges = (subtotal > 1000 ? 0 : 40);
   const discount = (subtotal > 500) ? 400 : 0;
@@ -45,12 +50,15 @@ const SharedCartPage = () => {
             {sharedCartProducts.map((item) => (
               <CartItem
                 key={item.productId}
+                productId={item.productId}
+                cartId={cartId}
                 name={item.name}
                 price={item.price}
                 rating={item.rating}
                 numRatings={item.numRatings}
                 addedBy={item.addedBy}
                 imageUrl={item.imageUrl}
+                onProductRemove={handleProductRemove} // Pass the removal handler
               />
             ))}
           </main>
@@ -67,11 +75,20 @@ const SharedCartPage = () => {
             <p>Subtotal (Incl. GST): ₹{subtotal}</p>
             <p>Shipping Charges (Incl. GST): ₹{shippingCharges}</p>
             <p>Discount:  
+              {sharedCartProducts.length > 0 &&
+                <Link to="/"> Continue to checkout</Link>
+              }
+            </p>
+            <p>GST: ₹{tax}</p>
+            <p>Subtotal (Incl. GST): ₹{subtotal}</p>
+            <p>Shipping Charges (Incl. GST): ₹{shippingCharges}</p>
+            <p>Discount:
               <em className="green">&nbsp; - ₹{discount}</em>
             </p>
             <p>
               <b>Total: ₹{(calctotal + shippingCharges).toFixed(2)}</b>
             </p>
+
           </aside>
         </section>
       </div>

@@ -1,7 +1,9 @@
 .heading{
     font-size:xx-large;
 }
-
+.width {
+    width: 200px; /* Adjust the width as needed */
+  }
 .cartItem{
     padding: 1rem;
     //@include flex(row, flex-start, center, 3rem);
@@ -24,13 +26,7 @@
         justify-content: center;
         align-items: flex-start;
         gap: 0.25rem;
-        a {
-            font-size: 1.2rem;
-            color: black;
-            &:hover {
-                color: blue;
-            }
-        }
+        
 
         span {
             font-weight: 500;
