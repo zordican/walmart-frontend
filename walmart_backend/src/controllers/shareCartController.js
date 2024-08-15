@@ -316,14 +316,28 @@ export const voteProduct = async (req, res) => {
 };
 
 export const deleteProduct = async (req, res) => {
-  const { cartId, productId } = req.params;
+  const { cartId, productId } = req.params; // Get cartId and productId from request parameters
 
   try {
-    // Remove the product from the cart
-    await prisma.cartProduct.deleteMany({
+    // Find the product in the cart based on cartId and productId
+    const cartProduct = await prisma.cartProduct.findFirst({
       where: {
         cartId: cartId,
         productId: productId,
+      },
+      select: {
+        id: true, // Select only the id field
+      },
+    });
+
+    if (!cartProduct) {
+      return res.status(404).json({ error: 'Product not found in cart' });
+    }
+
+    // Delete the product using the retrieved id
+    await prisma.cartProduct.delete({
+      where: {
+        id: cartProduct.id,
       },
     });
 
@@ -333,6 +347,3 @@ export const deleteProduct = async (req, res) => {
     res.status(500).json({ error: 'An error occurred while removing the product from the cart' });
   }
 };
-
-
-

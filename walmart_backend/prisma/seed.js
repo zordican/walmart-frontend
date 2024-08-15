@@ -7,104 +7,84 @@ const prisma = new PrismaClient();
 const main = async () => {
   const products = [
     {
-      name: "Oreo Chocolaty Biscuit",
-      price: 39.0,
-      imageUrl: "https://rukminim2.flixcart.com/image/850/1000/xif0q/cookie-biscuit/z/j/y/-original-imagwcjwgscghbdz.jpeg?q=90&crop=false",
-      rating: 4.5,
-      numRatings: 120,
-    },
-    {
-      name: "Coleman Sundome 6-Person Dome Tent",
-      price: 5999.0,
-      imageUrl: "https://i5.walmartimages.com/seo/Coleman-Sundome-6-Person-Dome-Tent-72-Center-Height-Overall-Dimensions-120-H-x-120-W_4c0a127f-6070-42e2-87af-b47d967d3c58_1.9a3bb2c23561543e0726c19a6522bae4.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF",
-      rating: 4.8,
-      numRatings: 85,
-    },
-    {
-      name: "Tylenol Extra Strength Acetaminophen Gels",
-      price: 349.0,
-      imageUrl: "https://i5.walmartimages.com/seo/Tylenol-Extra-Strength-Acetaminophen-Rapid-Release-Gels-24-Ct_bc34682b-a636-4efe-8eb3-6025144c4cfa.9b4a15752da489e69e8ffc17b156f8c1.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
-      rating: 4.7,
-      numRatings: 200,
-    },
-    {
-      name: "Great Value Purified Drinking Water (40 bottles)",
-      price: 699.0,
-      imageUrl: "https://i5.walmartimages.com/seo/Great-Value-Purified-Drinking-Water-16-9-fl-oz-Bottles-40-Count_061099c8-2637-49ad-9706-506d42bbe542.33c33902d22157d2c215a61e15fd4a4b.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
-      rating: 4.9,
-      numRatings: 150,
-    },
-    {
-      name: "Mainstays Comfort Complete Bed Pillow (2 pieces)",
-      price: 429.99,
-      imageUrl: "https://i5.walmartimages.com/seo/Mainstays-Comfort-Complete-Bed-Pillow-Standard-Queen_04754ad9-e885-4aa4-b2b1-bff2366cf575.0b8fd924fcff296303a5c76ff6d1a55b.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF",
+      name: "Lay's Barbecue Potato chips 10 ounce Plastic Bag",
+      price: 165, // $1.99 -> ₹165
+      imageUrl: "https://i5.walmartimages.com/seo/Lay-s-Potato-Chips-Barbecue-Flavor-7-75-oz-Bag_3a3bac6f-c3c1-4deb-ac5f-ed76e17e3009.00bf1b0ce6421683a4453591073ec472.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF",
       rating: 4.3,
-      numRatings: 65,
+      numRatings: 320,
     },
     {
-      name: "Disney 100 100th Anniversary Men's & Big Men's Mickey Mouse Faces and Time Flies Graphic Tee Shirts 2-Pack, Sizes S-3XL",
-      price: 799.99,
-      imageUrl: "https://i5.walmartimages.com/seo/Disney-100th-Anniversary-Men-s-Big-Men-s-Mickey-Mouse-Faces-Graphic-Tee-Shirts-Sizes-S-3XL_6ecbfcec-fdd1-412c-83c9-9ff5531d1945.bae63c48966ac93760daebbbdedcaa28.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
-      rating: 4.6,
-      numRatings: 90,
-    },
-    {
-      name: "Lepro LED Collapsible Camping Lantern 4-Packs, Super Bright, Battery Powered Camping Light, IPX4 Water Resistant",
-      price: 299.99,
-      imageUrl: "https://i5.walmartimages.com/seo/Lepro-LED-Collapsible-Camping-Lantern-4-Packs-Super-Bright-Battery-Powered-Light-IPX4-Water-Resistant-Portable-Emergency-Lights-Power-Outage-Hurrican_9df9e775-ad5d-4c95-8e5d-7a3af32eeec0.7c37de070d7ed064bd2fbd5d7385befe.png?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      name: "Mountain Dew, 12 oz Cans, 24 Count",
+      price: 1280, // $15.38 -> ₹1280
+      imageUrl: "https://i5.walmartimages.com/seo/Mountain-Dew-Citrus-Soda-Pop-12-fl-oz-24-Pack-Cans_494e5289-3e35-4383-93e9-87102b36b395_3.183a53c8dc8e9aea9f13e77eca9bc94b.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
       rating: 4.7,
-      numRatings: 110,
+      numRatings: 1020,
     },
     {
-      name: "Bose SoundLink Flex Wireless Waterproof Portable Bluetooth Speaker, Black",
-      price: 299.99,
-      imageUrl: "https://i5.walmartimages.com/seo/Bose-SoundLink-Flex-Wireless-Waterproof-Portable-Bluetooth-Speaker-Black_e3682e2c-1160-4a6b-b96a-50a7e8b8c045.23c03d5d3fdf6ae1aa19975a180fbf32.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
-      rating: 4.9,
-      numRatings: 300,
+      name: "Fresh Yellow Peach, Each",
+      price: 65, // $0.78 -> ₹65
+      imageUrl: "https://i5.walmartimages.com/seo/Fresh-Yellow-Peach-Each_f387846e-47eb-470f-a8e6-bcada0848532.64a94b8c68019d577dede8f236d97aa3.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      rating: 4.5,
+      numRatings: 890,
     },
     {
-      name: "Pocket Juice Slim Pro 20,000mAh, Portable Power Bank and Charger with Dual USB Ports, Black",
-      price: 1299.99,
-      imageUrl: "https://i5.walmartimages.com/seo/Pocket-Juice-Slim-Pro-20-000mAh-Portable-Power-Bank-and-Charger-with-Dual-USB-Ports-Black_387948b6-ba8a-4a43-9b08-3d49f781ba76.3933f6708f940ff3e3e81a5d45f30fdc.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
-      rating: 4.8,
-      numRatings: 250,
-    },
-    {
-      name: "Freshness Guaranteed Chocolate Chip Bakery Cookies, 14 oz, 10 Count",
-      price: 149.99,
-      imageUrl: "https://i5.walmartimages.com/seo/Freshness-Guaranteed-Chocolate-Chip-Bakery-Cookies-14-oz-10-Count_b8ff1c98-71aa-4cb8-8cd4-018ab0b2ac50.52b12ed2c82a7d96fe7dd87f10088782.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      name: "Camping Lantern With Ceiling Fan",
+      price: 830, // $9.99 -> ₹830
+      imageUrl: "https://i5.walmartimages.com/seo/Camping-Lantern-With-Ceiling-Fan-Weather-Resistant-Tent-Light-Camping-Accessories-Gear-With-18-LED-Bulbs-and-Hi-Lo-Fan-Black-by-Wakeman-Outdoors_1392a931-342e-4909-8815-126cb20bca51_1.178cb50a07f59a46d0075c9be3e6d7ee.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
       rating: 4.2,
+      numRatings: 650,
+    },
+    {
+      name: "Expert Grill Refillable Grill Lighter, 2-Pack",
+      price: 500, // $5.99 -> ₹500
+      imageUrl: "https://i5.walmartimages.com/seo/Expert-Grill-Refillable-Grill-Lighter-2-Pack_5716eab1-617b-45fc-bac4-11b5ea3ac06e.a9d26704a779800f2a65321b86ea725f.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      rating: 4.6,
+      numRatings: 420,
+    },
+    {
+      name: "Johnson & Johnson First Aid To Go Portable Mini Travel Kit, 12 pieces",
+      price: 335, // $4.02 -> ₹335
+      imageUrl: "https://i5.walmartimages.com/seo/Johnson-Johnson-First-Aid-To-Go-Portable-Mini-Travel-Kit-12-pieces_67899955-0d07-4ebe-9b8b-b03828ca348a.379e77d100850af7326e74b197885316.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      rating: 4.8,
+      numRatings: 510,
+    },
+    {
+      name: "Ozark Trail 7-Piece Camping Tool Set",
+      price: 1650, // $19.88 -> ₹1650
+      imageUrl: "https://i5.walmartimages.com/seo/Ozark-Trail-7-piece-Camping-Tool-Set-with-Hammer-Axe-Flashlight-and-Knives-Batteries-Included_7b40b324-896e-4f62-a862-5e596a2697d5.6251cfc438167631ec3d7f219622def8.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      rating: 4.3,
+      numRatings: 320,
+    },
+    {
+      name: "Aimerla Camping Cooking Utensil Set - 15 Pcs",
+      price: 1700, // $20.48 -> ₹1700
+      imageUrl: "https://i5.walmartimages.com/seo/Aimerla-Camping-Cooking-Utensil-Set-15-Pcs-Camping-Cookware-Kit-Durable-Grill-and-Camping-Accessories-for-Camping-Trip-BBQ-Hiking-RV-Travel_aab765cc-8164-4717-97a5-a4ba8194aefb.5d6f1fb290f3b63bf63ecd69c7248435.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      rating: 4.7,
+      numRatings: 220,
+    },
+    {
+      name: "Coleman All-Purpose Propane Gas Cylinder, 16 ounce, 2-Pack",
+      price: 1320, // $15.89 -> ₹1320
+      imageUrl: "https://i5.walmartimages.com/seo/Coleman-All-Purpose-Propane-Gas-Cylinder-16-ounce-2-Pack_d1fa82c6-1ed1-4f14-aea6-6ee444844785.08680bdc0276e2472156759cfffc68fb.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      rating: 4.4,
       numRatings: 180,
     },
     {
-      name: "Firewood",
-      price: 250.0,
-      imageUrl: "https://i5.walmartimages.com/seo/Essay-Group-Simple-Simon-Wood-Bundle_d05ba57a-570a-419c-87b7-d6ec28393828.7bc346c57878886ffbc4d7472daaaf36.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
-      rating: 4.0,
-      numRatings: 100,
+      name: "Portable Camping Shower Outdoor USB Rechargeable",
+      price: 2000, // $24.10 -> ₹2000
+      imageUrl: "https://i5.walmartimages.com/seo/Portable-Camping-Shower-Outdoor-USB-Rechargeable-Electric-Shower-Pump-for-Camping-Car-Washing-Gardening-Pet-Cleaning_41860cb3-c3a9-4f02-ad2c-3ecd83374fb1.ea212a5628108019847d2db30e5ad5ae.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      rating: 4.5,
+      numRatings: 360,
     },
     {
-      name: "Burger",
-      price: 150.0,
-      imageUrl: "https://i5.walmartimages.com/seo/SPAM-Classic-12-oz-1-CT_c7302df8-93bf-40b7-9c3f-3e67bd86d721.6df033ee132ffc38ec0779c7254d1f51.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
-      rating: 4.1,
-      numRatings: 95,
-    },
-    {
-      name: "Bread",
-      price: 50.0,
-      imageUrl: "https://i5.walmartimages.com/seo/Dave-s-Killer-Bread-21-Whole-Grains-and-Seeds-Thin-Sliced-Organic-Bread-Loaf-20-5-oz_9732b0b5-21d1-4cb8-9a18-0083b91d8900.f3cb0f7cfe134188cb72bf7c84e04505.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
-      rating: 4.3,
-      numRatings: 85,
-    },
-    {
-      name: "Sleeping Bags",
-      price: 1000.0,
-      imageUrl: "https://i5.walmartimages.com/seo/FUNDANGO-3-in-1-Double-Sleeping-Bag-Oversized-Lightweight-for-Adults-and-Kids-Sleeping-Bags-for-Camping-Hiking-Backpacking-Grey-Pink_cc7796d8-d50c-4e9e-888b-7e96c81db556.d80a03a377b5b89413b3baf0d5a5e264.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
-      rating: 4.7,
+      name: "KingCamp 17/25 PCS Stainless Steel Camping Cookware Set",
+      price: 3000, // $36.15 -> ₹3000
+      imageUrl: "https://i5.walmartimages.com/seo/KingCamp-17-25-PCS-Stainless-Steel-Camping-Cookware-Set-Nonstick-Lightweight-Compact-Backpacking-Cooking-Kit-Outdoor-Picnic-Hiking-3-People-Includes_ebbd91b5-07f1-444d-9283-8f5d043bf983.1fef184bc43a564ee7848341f241fe20.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      rating: 4.8,
       numRatings: 140,
     },
   ];
+  
   
 
   for (const product of products) {
