@@ -4,6 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "nodemon -r dotenv/config  --experimental-json-modules server.js",
     "seed": "node prisma/seed.js",  
     "build": "npm run dev"
