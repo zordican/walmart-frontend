@@ -63,32 +63,26 @@ const SharedCartPage = () => {
             ))}
           </main>
           <aside className={styles.calcSection}>
+            <p>GST: ₹{tax}</p>
+            <p>Subtotal (Incl. GST): ₹{subtotal}</p>
+            <p>Shipping Charges (Incl. GST): ₹{shippingCharges}</p>
+            <p>Discount:  ₹{discount}
+              
+            </p>
+            <p>
+              <b>Total: ₹{(calctotal + shippingCharges).toFixed(2)}</b>
+            </p>
+            <section>
             <button>
               {sharedCartProducts.length > 0 && 
                 <Link to="/">Continue to checkout</Link>
               }
             </button>
+            <br /><br /><br />
             <button>
               <Link to="/sharedcart">Share Your Cart</Link>
             </button>
-            <p>GST: ₹{tax}</p>
-            <p>Subtotal (Incl. GST): ₹{subtotal}</p>
-            <p>Shipping Charges (Incl. GST): ₹{shippingCharges}</p>
-            <p>Discount:  
-              {sharedCartProducts.length > 0 &&
-                <Link to="/"> Continue to checkout</Link>
-              }
-            </p>
-            <p>GST: ₹{tax}</p>
-            <p>Subtotal (Incl. GST): ₹{subtotal}</p>
-            <p>Shipping Charges (Incl. GST): ₹{shippingCharges}</p>
-            <p>Discount:
-              <em className="green">&nbsp; - ₹{discount}</em>
-            </p>
-            <p>
-              <b>Total: ₹{(calctotal + shippingCharges).toFixed(2)}</b>
-            </p>
-
+            </section>
           </aside>
         </section>
       </div>

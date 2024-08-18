@@ -19,7 +19,7 @@ const CartItem = ({ price, name, productId, cartId, rating, numRatings, addedBy,
     <div className={styles.cartItem}>
       <img src={imageUrl} alt={name} />
       <article>
-        
+        <p className={styles.productName}>{name}</p>
         <span><b>₹{price}</b></span>
         <span><b>Added By: </b>{addedBy}</span>
         <p>Product rating: <meter className="average-rating" min="0" max="5" value={rating} title={`${rating} out of 5`}>{rating} out of 5</meter></p>
