@@ -15,7 +15,8 @@ const PORT = process.env.PORT || 3000;
 const prisma = new PrismaClient();
 
 app.use(cors({
-  origin: 'http://localhost:3000', // Change this to your frontend's origin
+  // origin: 'http://localhost:3000', // Change this to your frontend's origin
+  origin: 'https://walmart_backend.vercel.app/', 
   credentials: true
 }));
 app.use(helmet());
