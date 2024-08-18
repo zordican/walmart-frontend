@@ -13,14 +13,10 @@ import Logout from './components/logout/Logout.jsx';
 import SharedCart from './components/CreateSharedCart/CreateSharedCart.jsx';
 import JoinCart from './components/JoinCart/JoinCart.jsx';
 import HomePage from './components/HomePage/HomePage.jsx';
-//import UserSharedCartsPage from './components/pages/UserSharedCartsPage.jsx';
  import SharedCartPage from './components/pages/SharedCartPage.jsx';
  import SetCardId from './components/cartIdSet/SetCartId.jsx';
-
-
 const router = createBrowserRouter([
   { path: "/",element: <App />,},
- // { path: "/cart", element: <SharedCart/>},
   { path: "/cards", element: <ItemCard/>},
   { path: "/profile", element: <Profile/>},
   { path: "/login", element: <Login />},

@@ -72,7 +72,7 @@ const Profile = () => {
                     </a>
                     {dropdownOpen && (
                         <div className={styles.dropdownMenu}>
-                            <a href="/switch-account" className={styles.dropdownItem}>Orders</a>
+                            <a href="/orders" className={styles.dropdownItem}>Orders</a>
                             <a className={styles.dropdownItem} onClick={handleLogout}>Sign Out</a>
                         </div>
                     )}

@@ -10,9 +10,7 @@ function Navbar() {
     <nav className={styles.navbar}>
 
       <div className = {styles.logo}>
-        <Link to={'/'}>
-        <img src="https://res.cloudinary.com/dp3aoinmu/image/upload/v1722868874/Walmart_PNG/asdqtv2h8pcla1czjz0s.png" alt="Walmart" />
-        </Link>
+        <a href="/"> <img src="https://res.cloudinary.com/dp3aoinmu/image/upload/v1722868874/Walmart_PNG/asdqtv2h8pcla1czjz0s.png" alt="Walmart" /></a>
       </div>
 
       <div className={styles.location}>

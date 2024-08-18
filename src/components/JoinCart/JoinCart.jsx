@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './JoinCart.module.scss';
-
+import Navbar from '../navbar/Navbar';
 const JoinCart = () => {
   const [invitationLink, setInvitationLink] = useState('');
   const [cart, setCart] = useState(null);
@@ -42,6 +42,13 @@ const JoinCart = () => {
 
   return (
     <div className={styles.joinCartContainer}>
+      <Navbar />
+      <div className={styles.card}>
+      <div className={styles.vectorArt}>
+        <img src="https://res.cloudinary.com/dp3aoinmu/image/upload/v1723535032/Walmart_PNG/sh5yf9pruyucn51v5qlk.jpg" alt="" />
+      </div>
+
+      <div className={styles.invitation}>
       <h2>Join a Shared Cart</h2>
       <form onSubmit={handleJoinCart}>
         <div className={styles.formGroup}>
@@ -57,7 +64,8 @@ const JoinCart = () => {
         {error && <div className={styles.error}>{error}</div>}
         <button type="submit">Join Cart</button>
       </form>
-
+      </div>
+      </div>
       {cart && (
         <div className={styles.cartDetails}>
           <h3>Shared Cart Details</h3>
