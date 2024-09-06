@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-<<<<<<< HEAD
-import styles from './Signup.module.scss';
-=======
 import './signup.css'
->>>>>>> frontend
 import { useNavigate } from 'react-router-dom';
 
 

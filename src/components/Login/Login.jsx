@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-<<<<<<< HEAD
-import './Login.css';
-=======
 import './login.css';
->>>>>>> frontend
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -22,14 +18,11 @@ const Login = () => {
       if (response.data.message === 'Login successful') {
         console.log('Login successful');
         localStorage.setItem('token', response.data.token);
-<<<<<<< HEAD
-=======
 
         // Store the cart ID in localStorage if it exists
         if (response.data.cartId) {
           localStorage.setItem('currentCartId', response.data.cartId);
         }
->>>>>>> frontend
         navigate('/'); // Redirect to home page after successful login
       }
     } catch (err) {
@@ -38,29 +31,12 @@ const Login = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="login-container">
-      
-      <form className="login-form">
-      <div className="image-container"><img src="https://res.cloudinary.com/dp3aoinmu/image/upload/v1723269218/Walmart_PNG/nkf7aa9iz6vqobaowd8k.jpg" alt="" /></div>
-        <h2>Login</h2>
-        <div className="input-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-=======
     /* <div className={styles.loginContainer}>
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div className={styles.formGroup}>
           <label htmlFor="username">Username or Email:</label>
           <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
->>>>>>> frontend
         </div>
         <div className="input-group">
           <label htmlFor="username">Username</label>
@@ -128,7 +104,7 @@ const Login = () => {
           Login
         </button>
         <div className="account-option">
-      <span>Don't have an account? </span>
+      <span>Don&apos;t have an account? </span>
       <a href="/signup">Sign Up</a>
     </div>
       </form>
