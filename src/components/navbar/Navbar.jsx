@@ -3,19 +3,22 @@ import Profile from "../profile/Profile"
 import styles from "./Navbar.module.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-
-
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { Link } from "react-router-dom"
 function Navbar() {
   return (
     <nav className={styles.navbar}>
 
       <div className = {styles.logo}>
-        <img src="https://res.cloudinary.com/dp3aoinmu/image/upload/v1722868874/Walmart_PNG/asdqtv2h8pcla1czjz0s.png" alt="Walmart" />
+        <a href="/"> <img src="https://res.cloudinary.com/dp3aoinmu/image/upload/v1722868874/Walmart_PNG/asdqtv2h8pcla1czjz0s.png" alt="Walmart" /></a>
       </div>
 
       <div className={styles.location}>
-        To be done...
-      </div>
+  <FontAwesomeIcon icon={faMapMarkerAlt} className={styles.locationIcon} />
+  <div className={styles.locationText}>
+      Select your location
+  </div>
+</div>
 
       <div className={styles.search}>
         <form action="" className={styles.search_box}>
