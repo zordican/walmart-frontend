@@ -89,7 +89,7 @@ export const checkAuth = async (req, res) => {
 
   if (token) {
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);//tells if the token is made from your .env config or not (chekcing authenticyt of token)
       const user = await prisma.user.findUnique({
         where: { id: decoded.userId },
       });
